@@ -6,8 +6,6 @@ use App\Modules\BienestarUniversitario\Repository\Models\Servicio;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
-use App\Modules\globalModules\Models\Alumno;
-use App\Modules\BienestarUniversitario\Repository\Models\ServicioSolicitado;
 
 class servicioRepository implements ServicioRepositoryInterface
 {
@@ -18,7 +16,7 @@ class servicioRepository implements ServicioRepositoryInterface
     }
     public function all()
     {
-        return $this->model::where("estado", 1)->get();
+        return $this->model::with("ampliaciones")->where("estado", 1)->get();
     }
     public function find($id)
     {
@@ -58,7 +56,7 @@ class servicioRepository implements ServicioRepositoryInterface
         $modelServicio->vacantesHombre = $data["vacantesHombre"];
         $modelServicio->vacantesMujer = $data["vacantesMujer"];
         $modelServicio->codigoMatricula = $data["codigoMatricula"];
-        $modelServicio->icono = $data["icono"];
+        $modelServicio->icono = $data["icono"] != null ? $data["icono"] : "fa-eye-slash";
         $modelServicio->save();
         return $this->find($modelServicio->id);
     }
@@ -67,8 +65,8 @@ class servicioRepository implements ServicioRepositoryInterface
     {
         $jsonServicio = $request->json()->all();
         $modelServicio = $this->find($jsonServicio["id"]);
-        $modelServicio->fechaInicio = $jsonServicio["fechaInicio"];
-        $modelServicio->fechaFin =  $jsonServicio["fechaFin"];
+        $modelServicio->fechaInicio = Carbon::parse($jsonServicio["fechaInicio"])->format("Y-m-d");
+        $modelServicio->fechaFin =  Carbon::parse($jsonServicio["fechaFin"])->format("Y-m-d");
         $modelServicio->activador = true;
         $modelServicio->save();
         return $modelServicio;
@@ -98,9 +96,10 @@ class servicioRepository implements ServicioRepositoryInterface
             ->where("alumnos.id", "=", $cuerpoPeticion["idAlumno"])
             ->where("alumno_requisitos.codigoMatricula", "=", $cuerpoPeticion["codigoMatricula"])
             ->select("alumno_requisitos.requisito_id as id")->distinct()->get();
-        $requisitosRegistrados = array_map(function ($object) {
-            return $object->id;
-        }, $requisitosRegistrados);
+
+        $requisitosRegistrados = collect($requisitosRegistrados)->map(function ($item, $key) {
+            return     $item->id;
+        });
         $requisitos = DB::table('servicios')
             ->join("serviciorequisitos", "serviciorequisitos.servicio_id", "=", "servicios.id")
             ->join("requisitos", "requisitos.id", "=", "serviciorequisitos.requisito_id")
@@ -109,23 +108,13 @@ class servicioRepository implements ServicioRepositoryInterface
             ->whereIn("serviciorequisitos.servicio_id", $listaServiciosSolicitados)->whereNotIn("serviciorequisitos.requisito_id", $requisitosRegistrados)->where("serviciorequisitos.estado", "=", 1)->where("tipos.id", "=", 1)->orderBy("requisitos.requerido", "DESC")->get();
         return $requisitos;
     }
-    /*  public function registroServiciosPorAlumno(Request $request)
-    {
-        $cuerpoPeticion = $request->json()->all();
-        $servicioSolicitadoCreado = ServicioSolicitado::create([
-            "alumno_id" => $cuerpoPeticion["idAlumno"],
-            "estado_servicio_id" => 1,
-            "fechaRegistro" => Carbon::now(),
-            "codigoMatricula" => $cuerpoPeticion["codigoMatricula"]
-        ]);
 
-        foreach ($cuerpoPeticion["listaDeServicioSolicitados"] as $servicioSolicitado) {
-            $servicioSolicitadoCreado->servicios()->attach($servicioSolicitado);
-        }
-        return ServicioSolicitado::find($servicioSolicitadoCreado->id)->with("estadoServicio")->with("servicios")->first();
-    }*/
     public function listaServiciosPorAlumno(Request $request)
     {
         $cuerpoPeticion = $request->json()->all();
+    }
+    public  function servicioConAmpliaciones(int $id)
+    {
+        return $this->model->where("id", "=", $id)->with("ampliaciones")->first();
     }
 }

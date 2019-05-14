@@ -2,9 +2,9 @@
 
 namespace App\Modules\BienestarUniversitario\Repository\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use App\Modules\bienestarUniversitario\Repository\Models\Requisito;
 use App\Modules\globalModules\Models\Alumno;
+use Illuminate\Database\Eloquent\Model;
 
 class AlumnoRequisito extends Model
 {

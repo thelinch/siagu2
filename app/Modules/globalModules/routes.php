@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 
 
 
-Route::group(['prefix' => 'global', "middleware" => "cors", 'namespace' => 'App\Modules\globalModules\controllers'], function () {
+Route::group(['prefix' => 'global', 'namespace' => 'App\Modules\globalModules\controllers'], function () {
     Route::get("/alumnosPregrado", ["as" => "global.tipo.all", "uses" => "alumnoController@alumnosPregrado"]);
     Route::get("/escuelaProfesional", ["as" => "global.tipo.all", "uses" => "escuelaProfesionalController@escuelaProfesional"]);
 

@@ -12,6 +12,7 @@ use App\Modules\BienestarUniversitario\service\bussiness\servicioService;
 use App\Modules\BienestarUniversitario\service\bussiness\alumnoRequisitoService;
 use App\Modules\BienestarUniversitario\service\bussiness\servicioSolicitadoService;
 use App\Modules\BienestarUniversitario\service\interfaces\servicioSolicitadoServiceInterface;
+use App\Modules\BienestarUniversitario\Repository\interfaces\ampliacionRepositoryInterface;
 
 class serviceRegisterProvider extends ServiceProvider
 {
@@ -47,7 +48,8 @@ class serviceRegisterProvider extends ServiceProvider
         });
         $this->app->bind("servicioService", function ($app) {
             return  new servicioService(
-                $app->make(servicioServiceInterface::class)
+                $app->make(servicioServiceInterface::class),
+                $app->make(ampliacionRepositoryInterface::class)
             );
         });
         $this->app->bind("alumnoRequisitoService", function ($app) {

@@ -4,14 +4,16 @@ namespace App\Modules\BienestarUniversitario\service\bussiness;
 use App\Modules\BienestarUniversitario\service\interfaces\servicioServiceInterface;
 use App\Modules\BienestarUniversitario\Repository\interfaces\servicioRepositoryInterface;
 use Illuminate\Http\Request;
-
+use App\Modules\BienestarUniversitario\Repository\interfaces\ampliacionRepositoryInterface;
 
 class servicioService implements servicioServiceInterface
 {
     private $repositoy;
-    public function __construct(servicioRepositoryInterface $repositoryServicio)
+    private $ampliacionRepository;
+    public function __construct(servicioRepositoryInterface $repositoryServicio, ampliacionRepositoryInterface $ampliacionRepository)
     {
         $this->repositoy = $repositoryServicio;
+        $this->ampliacionRepository = $ampliacionRepository;
     }
     public function all()
     {
@@ -60,5 +62,11 @@ class servicioService implements servicioServiceInterface
     public function listaServiciosPorAlumno(Request $request)
     {
         return $this->repositoy->listaServiciosPorAlumno($request);
+    }
+    public function agregarAmpliacionServicioId(Request $request)
+    {
+
+        $ampliacionCreado = $this->ampliacionRepository->create($request);
+        return $ampliacionCreado;
     }
 }

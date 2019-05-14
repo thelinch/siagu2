@@ -14,4 +14,5 @@ interface ServicioRepositoryInterface extends crudRepository
     public function requisitosPorArrayServicio(Request $arrayServicio);
     //public function registroServiciosPorAlumno(Request $request);
     public function listaServiciosPorAlumno(Request $request);
+    public  function servicioConAmpliaciones(int $id);
 }

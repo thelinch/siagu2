@@ -13,4 +13,5 @@ interface servicioServiceInterface extends crudService
     public function requisitosPorArrayServicio(Request $arrayServicio);
     //public function registroServiciosPorAlumno(Request $request);
     public function listaServiciosPorAlumno(Request $request);
+    public function agregarAmpliacionServicioId(Request $request);
 }
