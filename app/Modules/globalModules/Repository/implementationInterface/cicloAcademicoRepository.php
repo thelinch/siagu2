@@ -2,7 +2,8 @@
 namespace App\Modules\globalModules\Repository\implementationInterface;
 
 use App\Modules\globalModules\Repository\interfaces\cicloAcademicoRepositoryInterface;
-use App\Modules\globalModules\Models\cicloAcademico;
+use Illuminate\Http\Request;
+use App\Modules\globalModules\Repository\Models\cicloAcademico;
 
 class cicloAcademicoRepository implements cicloAcademicoRepositoryInterface
 {
