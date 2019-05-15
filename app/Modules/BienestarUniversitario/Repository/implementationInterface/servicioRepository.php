@@ -6,13 +6,13 @@ use App\Modules\BienestarUniversitario\Repository\Models\Servicio;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
-use App\Modules\globalModules\Models\CicloAcademico;
+use App\Modules\globalModules\Repository\Models\cicloAcademico;
 
 class servicioRepository implements ServicioRepositoryInterface
 {
     private $model;
     private $cicloAcademicoModel;
-    public function __construct(Servicio $servicio, CicloAcademico $cicloAcademicoModel)
+    public function __construct(Servicio $servicio, cicloAcademico $cicloAcademicoModel)
     {
         $this->model = $servicio;
         $this->cicloAcademicoModel = $cicloAcademicoModel;

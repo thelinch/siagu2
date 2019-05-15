@@ -4,8 +4,7 @@ namespace App\Modules\BienestarUniversitario\Repository\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Modules\bienestarUniversitario\Repository\Models\Requisito;
-use App\Modules\globalModules\Models\Alumno;
-use App\Modules\globalModules\Models\CicloAcademico;
+use App\Modules\globalModules\Repository\Models\cicloAcademico;
 
 class Servicio extends Model
 {
@@ -36,6 +35,6 @@ class Servicio extends Model
     }
     public function ciclosAcademicos()
     {
-        return $this->belongsToMany(CicloAcademico::class, "ciclo_academico_servicios", "servicio_id", "ciclo_academico_id");
+        return $this->belongsToMany(cicloAcademico::class, "ciclo_academico_servicios", "servicio_id", "ciclo_academico_id");
     }
 }

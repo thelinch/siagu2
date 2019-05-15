@@ -14,7 +14,7 @@ class cicloAcademicoRepository implements cicloAcademicoRepositoryInterface
     }
     public function all()
     {
-        return $this->model->where("estado", "=", 1);
+        return $this->model->where("estado", "=", 1)->get();
     }
     public function find($id)
     {
