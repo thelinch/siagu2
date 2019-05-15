@@ -1,10 +1,8 @@
 <?php
 
-namespace App\Modules\globalModules\Models;
+namespace App\Modules\globalModules\Repository\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Escuela;
-use App\Modules\BienestarUniversitario\Repository\Models\Servicio;
 use App\Modules\bienestarUniversitario\Repository\Models\Requisito;
 use App\Modules\BienestarUniversitario\Repository\Models\ServicioSolicitado;
 use App\Modules\BienestarUniversitario\Repository\Models\AlumnoRequisito;

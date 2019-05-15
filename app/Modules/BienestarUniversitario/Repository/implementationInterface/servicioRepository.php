@@ -6,17 +6,20 @@ use App\Modules\BienestarUniversitario\Repository\Models\Servicio;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
+use App\Modules\globalModules\Models\CicloAcademico;
 
 class servicioRepository implements ServicioRepositoryInterface
 {
     private $model;
-    public function __construct(Servicio $servicio)
+    private $cicloAcademicoModel;
+    public function __construct(Servicio $servicio, CicloAcademico $cicloAcademicoModel)
     {
         $this->model = $servicio;
+        $this->cicloAcademicoModel = $cicloAcademicoModel;
     }
     public function all()
     {
-        return $this->model::with("ampliaciones")->where("estado", 1)->get();
+        return $this->model::with(["ampliaciones", "cicloAcademicoActual.cicloAcademico"])->where("estado", 1)->get();
     }
     public function find($id)
     {
@@ -36,6 +39,7 @@ class servicioRepository implements ServicioRepositoryInterface
     public function create(Request $data)
     {
         $modelObjeto = $data->json()->all();
+
         $modelCreate = $this->model::create(
             [
                 "nombre" => $modelObjeto["nombre"],
@@ -43,9 +47,20 @@ class servicioRepository implements ServicioRepositoryInterface
                 "vacantesHombre" => $modelObjeto["vacantesHombre"] != null ? $modelObjeto["vacantesHombre"] : 0,
                 "vacantesMujer" => $modelObjeto["vacantesMujer"] != null ? $modelObjeto["vacantesMujer"] : 0,
                 "icono" => $modelObjeto["icono"] != null ? $modelObjeto["icono"] : "fa-eye-slash",
-                "codigoMatricula" => $modelObjeto["codigoMatricula"]
+                "codigoMatricula" => $modelObjeto["cicloAcademico"]["nombre"]
             ]
         );
+        if ($modelCreate->has("cicloAcademicoActual")) {
+            $cicloAcademicoActual =  $modelCreate->cicloAcademicoActual();
+            $cicloAcademicoActual->vigenca = false;
+            $cicloAcademicoActual->save();
+        }
+        $this->cicloAcademicoModel->create([
+            "servicio_id" => $modelCreate->id,
+            "ciclo_academico_id" => $modelCreate["cicloAcademico"]["id"],
+            "vigencia" => true
+        ]);
+
         return $this->find($modelCreate->id);
     }
     public function edit($id, array $data)

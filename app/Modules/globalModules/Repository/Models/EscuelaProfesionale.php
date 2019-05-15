@@ -1,6 +1,7 @@
 <?php
 
-namespace App\Modules\globalModules\Models;
+
+namespace App\Modules\globalModules\Repository\Models;
 
 use Illuminate\Database\Eloquent\Model;
 

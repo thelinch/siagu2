@@ -161,12 +161,12 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
-        App\Providers\bienestarUniversitario\RepositoryServiceProvider::class,
-        App\Providers\bienestarUniversitario\serviceRegisterProvider::class,
         //' App\Modules\BienestarUniversitario\helpers\serviceProvider\RepositoryServiceProvider',
         App\Modules\ModulesServiceProvider::class,
-        App\Providers\globalModule\repositoryRegisterProvider::class,
+        App\Providers\globalModule\RepositoryServiceProvider::class,
         App\Providers\globalModule\serviceRegisterProvider::class,
+        App\Providers\bienestarUniversitario\serviceRegisterProvider::class,
+        App\Providers\bienestarUniversitario\RepositoryServiceProvider::class,
         App\Providers\gradosYTitulos\RepositoryServiceProvider::class,
         /*
          * Package Service Providers...

@@ -3,11 +3,9 @@ namespace App\Modules\globalModules\service\bussiness;
 
 use App\Modules\globalModules\service\interfaces\alumnoServiceInterface;
 use Illuminate\Http\Request;
-use App\Modules\globalModules\Models\Alumno;
-use App\Modules\globalModules\Repository\interfaces\alumnoRepositoryInterface;
-use Illuminate\Support\Facades\DB;
 use App\Modules\BienestarUniversitario\Repository\Models\ServicioSolicitado;
 use App\Modules\BienestarUniversitario\Repository\Models\AlumnoRequisito;
+use App\Modules\globalModules\Repository\Models\Alumno;
 
 class alumnoService implements alumnoServiceInterface
 {

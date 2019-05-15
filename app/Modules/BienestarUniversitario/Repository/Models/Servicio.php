@@ -5,6 +5,7 @@ namespace App\Modules\BienestarUniversitario\Repository\Models;
 use Illuminate\Database\Eloquent\Model;
 use App\Modules\bienestarUniversitario\Repository\Models\Requisito;
 use App\Modules\globalModules\Models\Alumno;
+use App\Modules\globalModules\Models\CicloAcademico;
 
 class Servicio extends Model
 {
@@ -28,5 +29,13 @@ class Servicio extends Model
     public function ampliacionActual()
     {
         return $this->hasOne(Ampliacion::class)->where("estado", "=", 1)->where("codigoMatricula", "=", $this->codigoMatricula);
+    }
+    public function cicloAcademicoActual()
+    {
+        return $this->hasOne(cicloAcademicoServicios::class)->where("vigencia","=",true);
+    }
+    public function ciclosAcademicos()
+    {
+        return $this->belongsToMany(CicloAcademico::class, "ciclo_academico_servicios", "servicio_id", "ciclo_academico_id");
     }
 }
