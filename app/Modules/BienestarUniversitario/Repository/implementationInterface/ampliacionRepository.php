@@ -22,7 +22,7 @@ class ampliacionRepository implements ampliacionRepositoryInterface
     public function create(Request $data)
     {
         $cuerpoPeticion = $data->json()->all();
-        $modelCreate =  $this->model->create([
+        $this->model->create([
             "varon" => $cuerpoPeticion["varon"],
             "mujer" => $cuerpoPeticion["mujer"],
             "total" => $cuerpoPeticion["total"],
@@ -30,10 +30,13 @@ class ampliacionRepository implements ampliacionRepositoryInterface
             "fechaRegistro" => Carbon::now(),
             "codigoMatricula" => $cuerpoPeticion["codigoMatricula"]
         ]);
-        return $modelCreate;
+        // return $modelCreate;
     }
     public function edit($id, array $data)
     { }
     public function  listarAmpliacionPorServicioId(Request $request)
-    { }
+    {
+        $cuerpoPeticion = $request->json()->all();
+        return $this->model->where("estado", 1)->where("codigoMatricula", "=", $cuerpoPeticion["codigoMatricula"])->where("servicio_id", $cuerpoPeticion["id"])->get();
+    }
 }

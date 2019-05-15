@@ -17,4 +17,8 @@ class ampliacionController extends Controller
     {
         return response()->json($this->service->create($request));
     }
+    public function listaAmpliacionesPorServicio(Request $request)
+    {
+        return response()->json($this->service->listarAmpliacionPorServicioId($request));
+    }
 }

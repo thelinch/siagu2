@@ -6,16 +6,16 @@ use App\Modules\BienestarUniversitario\Repository\Models\Servicio;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
-use App\Modules\globalModules\Repository\Models\cicloAcademico;
+use App\Modules\BienestarUniversitario\Repository\Models\cicloAcademicoServicios;
 
 class servicioRepository implements ServicioRepositoryInterface
 {
     private $model;
     private $cicloAcademicoModel;
-    public function __construct(Servicio $servicio, cicloAcademico $cicloAcademicoModel)
+    public function __construct(Servicio $servicio, cicloAcademicoServicios $cicloAcademicoServicioModel)
     {
         $this->model = $servicio;
-        $this->cicloAcademicoModel = $cicloAcademicoModel;
+        $this->cicloAcademicoModel = $cicloAcademicoServicioModel;
     }
     public function all()
     {
@@ -43,21 +43,13 @@ class servicioRepository implements ServicioRepositoryInterface
         $modelCreate = $this->model::create(
             [
                 "nombre" => $modelObjeto["nombre"],
-                "total" => $modelObjeto["total"],
-                "vacantesHombre" => $modelObjeto["vacantesHombre"] != null ? $modelObjeto["vacantesHombre"] : 0,
-                "vacantesMujer" => $modelObjeto["vacantesMujer"] != null ? $modelObjeto["vacantesMujer"] : 0,
                 "icono" => $modelObjeto["icono"] != null ? $modelObjeto["icono"] : "fa-eye-slash",
-                "codigoMatricula" => $modelObjeto["cicloAcademico"]["nombre"]
+                "codigoMatricula" => $modelObjeto["matricula"]["nombre"]
             ]
         );
-        if ($modelCreate->has("cicloAcademicoActual")) {
-            $cicloAcademicoActual =  $modelCreate->cicloAcademicoActual();
-            $cicloAcademicoActual->vigenca = false;
-            $cicloAcademicoActual->save();
-        }
         $this->cicloAcademicoModel->create([
             "servicio_id" => $modelCreate->id,
-            "ciclo_academico_id" => $modelCreate["cicloAcademico"]["id"],
+            "ciclo_academico_id" => $modelObjeto["matricula"]["id"],
             "vigencia" => true
         ]);
 
@@ -132,4 +124,15 @@ class servicioRepository implements ServicioRepositoryInterface
     {
         return $this->model->where("id", "=", $id)->with("ampliaciones")->first();
     }
+    public function edicioTotalNumeroVaronesMujeresPorServicio(Request $request)
+    {
+        $cuerpoPeticion = $request->json()->all();
+        $modelEdit = $this->model->find($cuerpoPeticion["servicio_id"]);
+        $modelEdit->total = $modelEdit->total + $cuerpoPeticion["total"];
+        $modelEdit->vacantesHombre = $modelEdit->vacantesHombre + $cuerpoPeticion["varon"];
+        $modelEdit->vacantesMujer = $modelEdit->vacantesMujer + $cuerpoPeticion["mujer"];
+        $modelEdit->save();
+        return $modelEdit;
+    }
+
 }

@@ -9,11 +9,9 @@ use App\Modules\BienestarUniversitario\Repository\interfaces\ampliacionRepositor
 class servicioService implements servicioServiceInterface
 {
     private $repositoy;
-    private $ampliacionRepository;
-    public function __construct(servicioRepositoryInterface $repositoryServicio, ampliacionRepositoryInterface $ampliacionRepository)
+    public function __construct(servicioRepositoryInterface $repositoryServicio)
     {
         $this->repositoy = $repositoryServicio;
-        $this->ampliacionRepository = $ampliacionRepository;
     }
     public function all()
     {
@@ -66,7 +64,6 @@ class servicioService implements servicioServiceInterface
     public function agregarAmpliacionServicioId(Request $request)
     {
 
-        $ampliacionCreado = $this->ampliacionRepository->create($request);
-        return $ampliacionCreado;
+        return $this->repositoy->edicioTotalNumeroVaronesMujeresPorServicio($request);;
     }
 }

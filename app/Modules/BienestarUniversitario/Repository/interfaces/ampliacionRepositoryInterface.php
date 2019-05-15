@@ -7,4 +7,5 @@ use Illuminate\Http\Request;
 interface ampliacionRepositoryInterface extends crudRepository
 {
     public function  listarAmpliacionPorServicioId(Request $request);
+
 }

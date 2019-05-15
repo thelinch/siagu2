@@ -7,12 +7,14 @@ use App\Modules\BienestarUniversitario\service\bussiness\requisitoService;
 use App\Modules\BienestarUniversitario\service\interfaces\requisitoServiceInterface;
 use App\Modules\BienestarUniversitario\service\interfaces\servicioServiceInterface;
 use App\Modules\BienestarUniversitario\service\interfaces\alumnoRequisitoServiceInterface;
-
+use App\Modules\BienestarUniversitario\Repository\implementationInterface\servicioRepository;
 use App\Modules\BienestarUniversitario\service\bussiness\servicioService;
 use App\Modules\BienestarUniversitario\service\bussiness\alumnoRequisitoService;
 use App\Modules\BienestarUniversitario\service\bussiness\servicioSolicitadoService;
 use App\Modules\BienestarUniversitario\service\interfaces\servicioSolicitadoServiceInterface;
 use App\Modules\BienestarUniversitario\Repository\interfaces\ampliacionRepositoryInterface;
+use App\Modules\BienestarUniversitario\service\bussiness\ampliacionService;
+use App\Modules\BienestarUniversitario\service\interfaces\ampliacionServiceInterface;
 
 class serviceRegisterProvider extends ServiceProvider
 {
@@ -48,8 +50,7 @@ class serviceRegisterProvider extends ServiceProvider
         });
         $this->app->bind("servicioService", function ($app) {
             return  new servicioService(
-                $app->make(servicioServiceInterface::class),
-                $app->make(ampliacionRepositoryInterface::class)
+                $app->make(servicioServiceInterface::class)
             );
         });
         $this->app->bind("alumnoRequisitoService", function ($app) {
@@ -60,6 +61,12 @@ class serviceRegisterProvider extends ServiceProvider
         $this->app->bind("servicioSolicitadoService", function ($app) {
             return  new servicioSolicitadoService(
                 $app->make(servicioSolicitadoServiceInterface::class)
+            );
+        });
+        $this->app->bind("ampliacionService", function ($app) {
+            return new ampliacionService(
+                $app->make(ampliacionServiceInterface::class),
+                $app->make(servicioRepository::class)
             );
         });
     }

@@ -12,6 +12,7 @@ class cicloAcademico extends Model
     protected $casts = [
         "actual" => "boolean"
     ];
+  
     public function servicios()
     {
         return $this->belongsToMany(Servicio::class, "ciclo_academico_servicios", "ciclo_academico_id", "servicio_id")->wherePivot("vigencia", "=", true);
