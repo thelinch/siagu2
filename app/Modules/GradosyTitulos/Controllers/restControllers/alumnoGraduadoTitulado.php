@@ -19,4 +19,8 @@ class alumnoGraduadoTitulado extends Controller
     {
         return response()->json($this->service->create($request));
     }
+    public function edit($id,Request $request)
+    {
+        return response()->json($this->service->edit($id, $request->json()->all()));
+    }
 }

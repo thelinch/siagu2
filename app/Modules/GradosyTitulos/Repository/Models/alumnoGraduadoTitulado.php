@@ -15,7 +15,7 @@ class alumnoGraduadoTitulado extends Model
         "fecha_egreso" => "date:Y-m-d",
         "estado" => "boolean"
     ];
-    public function trabajosInvestigaciones()
+    public function trabajoInvestigacion()
     {
         return $this->belongsTo(trabajoInvestigacion::class);
     }

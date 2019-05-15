@@ -17,6 +17,6 @@ Route::group(['prefix' => 'gradostitulos', 'namespace' => 'App\Modules\GradosyTi
     Route::get('/obtenciongrado/listaObtencionGrado', ['as' => 'gradostitulos.obtencionGradoBachiller', 'uses' => 'obtencionGradoController@listaObtencionGrado']);
     Route::post('/empresa/listaEmpresa', ['as' => 'gradostitulos.empresaBachiller', 'uses' => 'empresaController@listaEmpresa']);
     Route::post('/alumnoGraduado/create', ['as' => 'gradostitulos.create', 'uses' => 'alumnoGraduadoTitulado@create']);
-
-
+    
+    Route::post('/alumnoGraduado/{id}/editar', ['as' => 'gradostitulos.edit', 'uses' => 'alumnoGraduadoTitulado@edit']);
 });

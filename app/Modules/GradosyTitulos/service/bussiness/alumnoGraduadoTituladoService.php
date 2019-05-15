@@ -23,5 +23,7 @@ class alumnoGraduadoTituladoService implements alumnoGraduadoTituladoServiceInte
         return $this->repository->create($data);
     }
     public function edit($id, array $data)
-    { }
+    {
+        return $this->repository->edit($id, $data);
+    }
 }
