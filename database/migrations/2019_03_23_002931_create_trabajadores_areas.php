@@ -16,9 +16,9 @@ class CreateTrabajadoresAreas extends Migration
             $table->increments('id');
             
             $table->string('sueldo', 20)->nullable();
-            $table->date('fecha_contrato_inicio')->nullable();
-            $table->date('fecha_contrato_fin')->nullable();
-            $table->string('resolucion', 45)->nullable();
+            $table->date('fecha_inicio')->nullable();
+            $table->date('fecha_fin')->nullable();
+            $table->string('url_resolucion_ocontrato', 255)->nullable();
             $table->string('codigo_resolucion', 45)->nullable();
             $table->integer('estado')->default(1)->nullable();
             $table->nullableTimestamps();

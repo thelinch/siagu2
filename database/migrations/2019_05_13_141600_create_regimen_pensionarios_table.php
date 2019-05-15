@@ -18,7 +18,6 @@ class CreateRegimenPensionariosTable extends Migration
             $table->string('codigo_cuspp', 15);
             $table->string('nombre', 50);
             $table->dateTime("fecha_inicio");
-            $table->string('extension', 8);
             $table->string("tipo_regimen_pensionario", 15);
             $table->string("entidad_afp", 60);
             $table->integer("estado")->default(1);
