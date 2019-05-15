@@ -21,4 +21,9 @@ class Persona extends Model
   {
     return $this->nombre . " " . $this->apellido_paterno . " " . $this->apellido_materno;
   }
+
+  public function Docente()
+  {
+    return $this->hasMany(Docente::class);
+  }
 }
