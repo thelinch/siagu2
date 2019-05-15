@@ -13,6 +13,7 @@ Route::group(['prefix' => 'global', 'namespace' => 'App\Modules\globalModules\co
     Route::get("/alumnosPregrado", ["as" => "global.tipo.all", "uses" => "alumnoController@alumnosPregrado"]);
     Route::get("/escuelaProfesional", ["as" => "global.tipo.all", "uses" => "escuelaProfesionalController@escuelaProfesional"]);
     Route::get("/docente", ["as" => "global.tipo.all", "uses" => "docenteController@docente"]);
+    Route::get("/decanoFacultad", ["as" => "global.tipo.all", "uses" => "decanoFacultadController@decanoFacultad"]);
 
     Route::post("/alumno/bienestarUniversitario", ["as" => "bienestar.global.bienestarUniversitario", "uses" => "alumnoController@buscarAlumnoConRequisitosYServiciosPorId"]);
     Route::post("/alumno/servicios", ["as" => "bienestar.global.listaServiciosPorAlumno", "uses" => "alumnoController@listaServiciosPorAlumno"]);
