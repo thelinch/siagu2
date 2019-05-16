@@ -23,8 +23,8 @@ class ampliacionRepository implements ampliacionRepositoryInterface
     {
         $cuerpoPeticion = $data->json()->all();
         $this->model->create([
-            "varon" => $cuerpoPeticion["varon"],
-            "mujer" => $cuerpoPeticion["mujer"],
+            "varon" => $cuerpoPeticion["varon"] == null ? 0 : $cuerpoPeticion["varon"],
+            "mujer" => $cuerpoPeticion["mujer"] == null ? 0 : $cuerpoPeticion["mujer"],
             "total" => $cuerpoPeticion["total"],
             "servicio_id" => $cuerpoPeticion["servicio_id"],
             "fechaRegistro" => Carbon::now(),
@@ -39,4 +39,5 @@ class ampliacionRepository implements ampliacionRepositoryInterface
         $cuerpoPeticion = $request->json()->all();
         return $this->model->where("estado", 1)->where("codigoMatricula", "=", $cuerpoPeticion["codigoMatricula"])->where("servicio_id", $cuerpoPeticion["id"])->get();
     }
+   
 }

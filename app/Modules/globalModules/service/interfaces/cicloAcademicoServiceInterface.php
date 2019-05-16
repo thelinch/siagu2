@@ -6,5 +6,5 @@ use Illuminate\Http\Request;
 
 interface cicloAcademicoServiceInterface extends crudService
 { 
-    
+    public function modificarCicloAcademicoPorServicio(Request $request);
 }

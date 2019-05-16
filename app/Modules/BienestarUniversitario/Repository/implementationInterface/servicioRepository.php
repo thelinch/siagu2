@@ -19,7 +19,7 @@ class servicioRepository implements ServicioRepositoryInterface
     }
     public function all()
     {
-        return $this->model::with(["ampliaciones", "cicloAcademicoActual.cicloAcademico"])->where("estado", 1)->get();
+        return $this->model::with(["cicloAcademicoActual.cicloAcademico"])->where("estado", 1)->get();
     }
     public function find($id)
     {
@@ -134,5 +134,17 @@ class servicioRepository implements ServicioRepositoryInterface
         $modelEdit->save();
         return $modelEdit;
     }
-
+    public function reiniciarServicioYActualizarCicloAcademico(int $id, string $codigoMatriculaSeleccionado)
+    {
+        $modelEdit = $this->model->find($id);
+        if ($modelEdit->has("cicloAcademicoActual")) {
+            $modelEdit->cicloAcademicoActual()->update(["vigencia" => false]);
+        }
+        $modelEdit->total = 0;
+        $modelEdit->vacantesHombre = 0;
+        $modelEdit->vacantesMujer = 0;
+        $modelEdit->codigoMatricula = $codigoMatriculaSeleccionado;
+        $modelEdit->save();
+        return $modelEdit;
+    }
 }

@@ -26,4 +26,6 @@ class cicloAcademicoRepository implements cicloAcademicoRepositoryInterface
     { }
     public function edit($id, array $data)
     { }
+    public function modificarCicloAcademicoPorServicio(Request $request)
+    { }
 }

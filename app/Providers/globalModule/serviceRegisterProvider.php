@@ -6,10 +6,9 @@ use App\Modules\globalModules\service\bussiness\alumnoService;
 use App\Modules\globalModules\service\interfaces\alumnoServiceInterface;
 use App\Modules\globalModules\service\bussiness\fileService;
 use App\Modules\globalModules\service\interfaces\fileServiceInterface;
-use App\Modules\globalModules\Repository\implementationInterface\alumnoRepository;
-use App\Modules\globalModules\Repository\interfaces\alumnoRepositoryInterface;
 use App\Modules\globalModules\service\bussiness\cicloAcademicoService;
 use App\Modules\globalModules\service\interfaces\cicloAcademicoServiceInterface;
+use App\Modules\BienestarUniversitario\Repository\implementationInterface\servicioRepository;
 
 class serviceRegisterProvider extends ServiceProvider
 {
@@ -27,7 +26,8 @@ class serviceRegisterProvider extends ServiceProvider
         });
         $this->app->bind("cicloAcademicoService", function ($app) {
             return new cicloAcademicoService(
-                $app->make(cicloAcademicoServiceInterface::class)
+                $app->make(cicloAcademicoServiceInterface::class),
+                $app->make(servicioRepository::class)
             );
         });
     }
