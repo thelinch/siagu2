@@ -4,10 +4,10 @@ namespace App\Modules\globalModules\Repository\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Docente extends Model
+class trabajadorArea extends Model
 {
     //
-    protected $table = "docentes";
+    protected $table = "trabajadores_areas";
     protected $casts = [
         "estado" => "boolean",
     ];
@@ -17,13 +17,14 @@ class Docente extends Model
         return $this->belongsTo(Persona::class);
     }
 
-    public function DecanoFacultad()
+    public function administrativo()
     {
-        return $this->belongsTo(DecanoFacultad::Class);
+        return $this->belongsTo(administrativos::Class);
     }
 
-    public function Rector()
+    public function cargo()
     {
-        return $this->belongsTo(Rector::Class);
+        return $this->belongsTo(Cargo::class);
     }
+    
 }

@@ -1,11 +1,11 @@
 <?php
 namespace App\Modules\globalModules\service\bussiness;
 
-use App\Modules\globalModules\service\interfaces\decanoFacultadServiceInterface;
+use App\Modules\globalModules\service\interfaces\rectorServiceInterface;
 use Illuminate\Http\Request;
-use App\Modules\globalModules\Repository\Models\DecanoFacultad;
+use App\Modules\globalModules\Repository\Models\Rector;
 
-class decanoFacultadService implements decanoFacultadServiceInterface
+class rectorService implements rectorServiceInterface
 {
     private $repository;
     /* public function __construct(alumnoRepositoryInterface $alumnoRepository)
@@ -33,9 +33,8 @@ class decanoFacultadService implements decanoFacultadServiceInterface
     {
         return $this->repository->edit($id, $data);
     }
-    public function listaDecanoFacultades()
+    public function listaRectores()
     {
-          return DecanoFacultad::with("Docente.Persona.tipo_documento")->where("estado", true)->get();
-   
+        return Rector::with(["Docente.Persona.tipo_documento"])->where("estado", true)->get();
     }
 }

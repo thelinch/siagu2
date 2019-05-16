@@ -1,11 +1,11 @@
 <?php
 namespace App\Modules\globalModules\service\bussiness;
 
-use App\Modules\globalModules\service\interfaces\decanoFacultadServiceInterface;
+use App\Modules\globalModules\service\interfaces\trabajadorAreaServiceInterface;
 use Illuminate\Http\Request;
-use App\Modules\globalModules\Repository\Models\DecanoFacultad;
+use App\Modules\globalModules\Repository\Models\trabajadorArea;
 
-class decanoFacultadService implements decanoFacultadServiceInterface
+class trabajadorAreaService implements trabajadorAreaServiceInterface
 {
     private $repository;
     /* public function __construct(alumnoRepositoryInterface $alumnoRepository)
@@ -33,9 +33,9 @@ class decanoFacultadService implements decanoFacultadServiceInterface
     {
         return $this->repository->edit($id, $data);
     }
-    public function listaDecanoFacultades()
+    public function listaTrabajadorAreas()
     {
-          return DecanoFacultad::with("Docente.Persona.tipo_documento")->where("estado", true)->get();
+          return trabajadorArea::with(["cargo","administrativo.Persona.tipo_documento"])->where("estado", true)->get();
    
     }
 }

@@ -38,7 +38,7 @@ class docenteService implements docenteServiceInterface
     }
     public function listaDocentes()
     {
-          return Docente::with("Persona")->where("estado", true)->get();
+          return Docente::with("Persona.tipo_documento")->where("estado", true)->get();
    
     }
 }

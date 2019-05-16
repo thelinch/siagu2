@@ -9,13 +9,17 @@ class Persona extends Model
 {
   //
   protected $appends = ["nombre_completo"];
+  protected $table = "personas";
+    protected $casts = [
+        "estado" => "boolean",
+    ];
   public function alumnos()
   {
     return $this->hasMany(Alumno::class);
   }
   public function documento()
   {
-    return $this->belongsTo(TipoDocumento::class);
+    return $this->belongsTo(TiposDocumento::class);
   }
   public function getNombreCompletoAttribute()
   {
@@ -25,5 +29,10 @@ class Persona extends Model
   public function Docente()
   {
     return $this->hasMany(Docente::class);
+  }
+  
+  public function tipo_documento()
+  {
+    return $this->belongsTo(TiposDocumento::class);
   }
 }

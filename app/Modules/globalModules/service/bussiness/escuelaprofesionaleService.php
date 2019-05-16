@@ -3,10 +3,7 @@ namespace App\Modules\globalModules\service\bussiness;
 
 use App\Modules\globalModules\service\interfaces\escuelaprofesionaleServiceInterface;
 use Illuminate\Http\Request;
-use App\Modules\globalModules\Models\EscuelaProfesionale;
-use App\Modules\globalModules\Repository\interfaces\alumnoRepositoryInterface;
-use Illuminate\Support\Facades\DB;
-use App\Modules\BienestarUniversitario\Repository\Models\ServicioSolicitado;
+use App\Modules\globalModules\Repository\Models\EscuelaProfesionale;
 
 class escuelaprofesionaleService implements escuelaprofesionaleServiceInterface
 {
@@ -39,10 +36,6 @@ class escuelaprofesionaleService implements escuelaprofesionaleServiceInterface
     public function listaEscuelasProfesionales()
     {
           return EscuelaProfesionale::with("facultad_oficina")->where("estado", true)->get();
-       /* return DB::table("alumnos")
-            ->join("personas", "personas.id", "=", "alumnos.persona_id")
-            ->join("tipos_documentos", "tipos_documentos.id", "=", "personas.tipo_documento_id")
-            ->select("alumnos.*","personas.*","tipos_documentos.*")
-            ->where("alumnos.grado_alumno", "=", true)->get();*/
+    
     }
 }

@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Modules\bienestarUniversitario\Repository\Models\Requisito;
 use App\Modules\BienestarUniversitario\Repository\Models\ServicioSolicitado;
 use App\Modules\BienestarUniversitario\Repository\Models\AlumnoRequisito;
+use App\Modules\globalModules\Models\FacultadOficina;
 
 class Alumno extends Model
 {
@@ -26,7 +27,7 @@ class Alumno extends Model
     {
         return $this->belongsTo(Persona::class);
     }
-
+ 
     public function requisitos()
     {
         return $this->belongsToMany(Requisito::class, "alumno_requisitos", "alumno_id", "requisito_id")->withPivot("codigoMatricula", "fechaRegistro");
@@ -39,4 +40,5 @@ class Alumno extends Model
     {
         return $this->belongsTo(tipoAlumno::class);
     }
+    
 }

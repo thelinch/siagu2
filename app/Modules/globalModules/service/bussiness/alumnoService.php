@@ -37,7 +37,7 @@ class alumnoService implements alumnoServiceInterface
     }
     public function listaAlumnosPregrado()
     {
-        return Alumno::with(["persona", "escuelaProfesional"])->where("grado_alumno", true)->get();
+        return Alumno::with(["persona.tipo_documento", "escuelaProfesional.facultad_oficina"])->where("grado_alumno", true)->get();
         /* return DB::table("alumnos")
             ->join("personas", "personas.id", "=", "alumnos.persona_id")
             ->join("tipos_documentos", "tipos_documentos.id", "=", "personas.tipo_documento_id")

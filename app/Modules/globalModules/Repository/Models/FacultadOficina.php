@@ -12,4 +12,5 @@ class FacultadOficina extends Model
   {
     return $this->hasMany(EscuelaProfesionale::class);
   }
+  
 }
