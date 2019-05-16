@@ -17,8 +17,12 @@ use App\Modules\GradosyTitulos\Repository\implementationInterface\obtencionGrado
 
 use App\Modules\GradosyTitulos\Repository\interfaces\empresaRepositoryInterface;
 use App\Modules\GradosyTitulos\Repository\implementationInterface\empresaRepository;
+
 use App\Modules\GradosyTitulos\Repository\interfaces\alumnoGraduadoTituladoRepositoryInterface;
 use App\Modules\GradosyTitulos\Repository\implementationInterface\alumnoGraduadoTituladoRepository;
+
+use App\Modules\GradosyTitulos\Repository\interfaces\registroAlumnoGraduadoTituladoRepositoryInterface;
+use App\Modules\GradosyTitulos\Repository\implementationInterface\registroAlumnoGraduadoTituladoRepository;
 
 class RepositoryServiceProvider extends ServiceProvider
 {
@@ -50,9 +54,15 @@ class RepositoryServiceProvider extends ServiceProvider
             empresaRepositoryInterface::class,
             empresaRepository::class
         );
+
         $this->app->bind(
             alumnoGraduadoTituladoRepositoryInterface::class,
             alumnoGraduadoTituladoRepository::class
+        );
+
+        $this->app->bind(
+            registroAlumnoGraduadoTituladoRepositoryInterface::class,
+            registroAlumnoGraduadoTituladoRepository::class
         );
     }
 }

@@ -19,7 +19,7 @@ class CreateTableRegistrosGraduadosTitulados extends Migration
             $table->string('numero_resolucion', 30)->nullable();
             $table->date('fecha_resolucion')->nullable();
             $table->string('numero_diploma', 30)->nullable();
-            $table->date('fecha_emison_diploma')->nullable();
+            $table->date('fecha_emision_diploma')->nullable();
             $table->string('registro_libro', 10)->nullable();
             $table->string('registro_folio', 20)->nullable();
             $table->string('numero_registro', 20)->nullable();

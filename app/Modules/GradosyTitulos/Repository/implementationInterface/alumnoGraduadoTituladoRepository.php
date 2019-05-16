@@ -7,6 +7,7 @@ use App\Modules\GradosyTitulos\Repository\interfaces\alumnoGraduadoTituladoRepos
 use App\Modules\GradosyTitulos\Repository\Models\alumnoGraduadoTitulado;
 use App\Modules\GradosyTitulos\Repository\Models\trabajoInvestigacion;
 use App\Modules\globalModules\Models\Alumno;
+use Carbon\Carbon;
 
 class alumnoGraduadoTituladoRepository implements alumnoGraduadoTituladoRepositoryInterface
 {
@@ -37,8 +38,8 @@ class alumnoGraduadoTituladoRepository implements alumnoGraduadoTituladoReposito
             "alumno_general_id" => $cuerpoPeticion["alumno_general_id"],
             "procedencia_bachiller" => $cuerpoPeticion["codigo_universidad"]["nombre"],
             "procednecia_titulo_pedagogico" => "NINGUNO",
-            "fecha_ingreso" => $cuerpoPeticion["fecha_ingreso"],
-            "fecha_egreso" => $cuerpoPeticion["fecha_egreso"],
+            "fecha_ingreso" => Carbon::parse($cuerpoPeticion["fecha_ingreso"])->format("Y-m-d"),
+            "fecha_egreso" =>  Carbon::parse($cuerpoPeticion["fecha_egreso"])->format("Y-m-d"), 
             "creditos_aprobados" => $cuerpoPeticion["creditos_aprobados"],
             "foto" => "dwdwd",
             "tipo_alumno_id" => 1,
@@ -65,8 +66,8 @@ class alumnoGraduadoTituladoRepository implements alumnoGraduadoTituladoReposito
         //  $trabajoInvestigacion->nombre = $data["trabajo_investigacion"]["nombre"];
         //$alumnoGraduadoTitulado->
         $alumnoGraduadoTitulado->procedencia_bachiller = $data["codigo_universidad"]["nombre"];
-        $alumnoGraduadoTitulado->fecha_ingreso = $data["fecha_ingreso"];
-        $alumnoGraduadoTitulado->fecha_egreso = $data["fecha_egreso"];
+        $alumnoGraduadoTitulado->fecha_ingreso =  Carbon::parse($data["fecha_ingreso"])->format("Y-m-d");
+        $alumnoGraduadoTitulado->fecha_egreso = Carbon::parse($data["fecha_egreso"])->format("Y-m-d");
         $alumnoGraduadoTitulado->creditos_aprobados = $data["creditos_aprobados"];
         $alumnoGraduadoTitulado->empresa_id = $data["codigo_universidad"]["id"];
         $alumnoGraduadoTitulado->nombre_programa_estudio_id = $data["nombre_programa_estudio"]["id"];
