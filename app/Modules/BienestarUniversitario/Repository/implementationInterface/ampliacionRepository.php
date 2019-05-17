@@ -5,13 +5,16 @@ use App\Modules\BienestarUniversitario\Repository\interfaces\ampliacionRepositor
 use App\Modules\BienestarUniversitario\Repository\Models\Ampliacion;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
+use App\Modules\BienestarUniversitario\Repository\Models\Servicio;
 
 class ampliacionRepository implements ampliacionRepositoryInterface
 {
     private $model;
-    public function __construct(Ampliacion $ampliacion)
+    private $servicioModel;
+    public function __construct(Ampliacion $ampliacion, Servicio $servicioModel)
     {
         $this->model = $ampliacion;
+        $this->servicioModel = $servicioModel;
     }
     public function all()
     { }
@@ -37,7 +40,7 @@ class ampliacionRepository implements ampliacionRepositoryInterface
     public function  listarAmpliacionPorServicioId(Request $request)
     {
         $cuerpoPeticion = $request->json()->all();
-        return $this->model->where("estado", 1)->where("codigoMatricula", "=", $cuerpoPeticion["codigoMatricula"])->where("servicio_id", $cuerpoPeticion["id"])->get();
+        return $this->servicioModel->find($cuerpoPeticion["id"])->ampliaciones()->where("estado", 1)->get();
+        // return $this->model->where("estado", 1)->where("codigoMatricula", "=", $cuerpoPeticion["codigoMatricula"])->where("servicio_id", $cuerpoPeticion["id"])->get();
     }
-   
 }

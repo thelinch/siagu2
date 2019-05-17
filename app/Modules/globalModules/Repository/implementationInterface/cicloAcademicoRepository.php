@@ -4,13 +4,16 @@ namespace App\Modules\globalModules\Repository\implementationInterface;
 use App\Modules\globalModules\Repository\interfaces\cicloAcademicoRepositoryInterface;
 use Illuminate\Http\Request;
 use App\Modules\globalModules\Repository\Models\cicloAcademico;
+use App\Modules\BienestarUniversitario\Repository\Models\cicloAcademicoServicios;
 
 class cicloAcademicoRepository implements cicloAcademicoRepositoryInterface
 {
     private $model;
-    public function __construct(cicloAcademico $cicloAcademico)
+    private $cicloAcademicoServicioModel;
+    public function __construct(cicloAcademico $cicloAcademico, cicloAcademicoServicios $cicloAcademicoServicioModel)
     {
         $this->model = $cicloAcademico;
+        $this->cicloAcademicoServicioModel = $cicloAcademicoServicioModel;
     }
     public function all()
     {
@@ -27,5 +30,11 @@ class cicloAcademicoRepository implements cicloAcademicoRepositoryInterface
     public function edit($id, array $data)
     { }
     public function modificarCicloAcademicoPorServicio(Request $request)
-    { }
+    {
+        $cuerpoPeticion = $request->json()->all();
+        $this->cicloAcademicoServicioModel->create([
+            "servicio_id" => $cuerpoPeticion["idServicioSelecionado"],
+            "ciclo_academico_id" => $cuerpoPeticion["idCicloAcademico"]
+        ]);
+    }
 }

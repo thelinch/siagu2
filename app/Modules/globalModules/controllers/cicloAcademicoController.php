@@ -17,4 +17,8 @@ class cicloAcademicoController extends Controller
     {
         return response()->json($this->service->all());
     }
+    public function modificarCicloAcademicoPorServicio(Request $request)
+    {
+        return response()->json($this->service->modificarCicloAcademicoPorServicio($request));
+    }
 }
