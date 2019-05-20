@@ -7,6 +7,7 @@ use App\Modules\BienestarUniversitario\Repository\Models\Tipo;
 use App\Modules\BienestarUniversitario\Repository\Models\Servicio;
 use App\Modules\BienestarUniversitario\Repository\Models\RequisitoArchivos;
 use App\Modules\globalModules\Models\Alumno;
+use App\Modules\BienestarUniversitario\Repository\Models\requisitoArchivo;
 
 class Requisito extends Model
 {
@@ -16,7 +17,8 @@ class Requisito extends Model
     protected $casts = [
         "estado" => "boolean",
         "requerido" => "boolean",
-        "prioridad" => "boolean"
+        "prioridad" => "boolean",
+        "actualizacion" => "boolean"
     ];
     public function tipos()
     {
@@ -28,7 +30,7 @@ class Requisito extends Model
     }
     public function archivos()
     {
-        return $this->hasMany(RequisitoArchivos::class);
+        return $this->hasMany(RequisitoArchivos::class)->where("estado", true);
     }
     public function alumnos()
     {

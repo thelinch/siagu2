@@ -30,5 +30,7 @@ Route::group(['prefix' => 'global', 'namespace' => 'App\Modules\globalModules\co
     Route::get("/cicloAcademico/all", ["as" => "global.cicloAcademico.all", "uses" => "cicloAcademicoController@all"]);
     Route::post("/cicloAcademico/modificarCicloAcademicoPorServicio", ["as" => "global.cicloAcademico.modificarCicloAcademicoPorServicio", "uses" => "cicloAcademicoController@modificarCicloAcademicoPorServicio"]);
 
+
     Route::post("/fileUpload/Requisito", ["as" => "bienestar.global.fileUpload.Requisito", "uses" => "fileController@fileUploadRequisito"]);
+    Route::post("/fileUpload/elimarArchivoRequisito", ["as" => "bienestar.global.fileUpload.elimarArchivoRequisito", "uses" => "fileController@elimarArchivoRequisito"]);
 });

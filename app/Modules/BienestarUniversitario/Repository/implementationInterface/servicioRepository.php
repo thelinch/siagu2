@@ -61,7 +61,7 @@ class servicioRepository implements ServicioRepositoryInterface
         $modelServicio->nombre = $data["nombre"];
         $modelServicio->icono = $data["icono"] != null ? $data["icono"] : "fa-eye-slash";
         $modelServicio->save();
-        return $this->find($modelServicio->id);
+        return $modelServicio;
     }
 
     public function activarServicio(Request $request)
@@ -130,18 +130,23 @@ class servicioRepository implements ServicioRepositoryInterface
         $modelEdit->save();
         return $modelEdit;
     }
-    public function reiniciarServicioYActualizarCicloAcademico(int $id, string $codigoMatriculaSeleccionado)
+    public function reiniciarServicioYActualizarCicloAcademico(int $id, string $codigoMatriculaSeleccionado, int $idCicloAcademico)
     {
-        $modelEdit = Servicio::with(["cicloAcademicoActual.cicloAcademico"])->where("id", $id)->get()->first();;
+        $modelEdit = Servicio::find($id);
         if ($modelEdit->has("cicloAcademicoActual")) {
             $modelEdit->cicloAcademicoActual()->update(["vigencia" => false]);
         }
         $modelEdit->ampliaciones()->update(["estado" => 0]);
+        $this->cicloAcademicoModel->create([
+            "servicio_id" => $id,
+            "ciclo_academico_id" => $idCicloAcademico
+        ]);
         $modelEdit->total = 0;
         $modelEdit->vacantesHombre = 0;
         $modelEdit->vacantesMujer = 0;
         $modelEdit->codigoMatricula = $codigoMatriculaSeleccionado;
         $modelEdit->save();
-        return $modelEdit;
+        return Servicio::with(["cicloAcademicoActual.cicloAcademico"])->where("id", $modelEdit->id)->get()->first();
     }
+  
 }

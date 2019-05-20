@@ -16,5 +16,6 @@ interface ServicioRepositoryInterface extends crudRepository
     public function listaServiciosPorAlumno(Request $request);
     public  function servicioConAmpliaciones(int $id);
     public function edicioTotalNumeroVaronesMujeresPorServicio(Request $request);
-    public function reiniciarServicioYActualizarCicloAcademico(int $id,string $codigoMatriculaSeleccionado);
+    public function reiniciarServicioYActualizarCicloAcademico(int $id, string $codigoMatriculaSeleccionado, int $idCicloAcademico);
+   
 }

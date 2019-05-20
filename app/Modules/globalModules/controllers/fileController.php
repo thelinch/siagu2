@@ -53,4 +53,8 @@ class FileController extends Controller
         }
         return $creacion;
     }
+    public function elimarArchivoRequisito(Request $request)
+    {
+        return response()->json($this->service->elimnarArchivoRequisito($request));
+    }
 }

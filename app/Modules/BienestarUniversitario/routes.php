@@ -22,6 +22,8 @@ Route::group(['prefix' => 'bienestar', 'namespace' => 'App\Modules\BienestarUniv
     Route::post("/requisito/updateTipo", ["as" => "bienestar.requisito.updateTipo", "uses" => "requisitoController@updateTipo"]);
     Route::post("/requisito/updateServicio", ["as" => "bienestar.requisito.updateServicio", "uses" => "requisitoController@updateServicio"]);
     Route::post("/requisito/archivos", ["as" => "bienestar.requisito.archivos", "uses" => "requisitoController@getArchivosPorRequisitoId"]);
+    Route::post("/requisito/updateActualizacion", ["as" => "bienestar.requisito.cambiarActualizacion", "uses" => "requisitoController@cambiarActualizacion"]);
+    Route::post("/requisito/listarArchivos", ["as" => "bienestar.requisito.listarArchivos", "uses" => "requisitoController@listarArchivosPorServicio"]);
 
     //FIN DE RUTAS DE REQUISITO
 

@@ -39,8 +39,8 @@ class cicloAcademicoService implements cicloAcademicoServiceInterface
     public function modificarCicloAcademicoPorServicio(Request $request)
     {
         $cuerpoPeticion = $request->json()->all();
-        $modelServicio = $this->repositoryServicio->reiniciarServicioYActualizarCicloAcademico($cuerpoPeticion["idServicioSelecionado"], $cuerpoPeticion["nombreCicloAcademicoSeleccionado"]);
-        $this->repository->modificarCicloAcademicoPorServicio($request);
+        $modelServicio = $this->repositoryServicio->reiniciarServicioYActualizarCicloAcademico($cuerpoPeticion["idServicioSelecionado"], $cuerpoPeticion["nombreCicloAcademicoSeleccionado"], $cuerpoPeticion["idCicloAcademico"]);
+        // $this->repository->modificarCicloAcademicoPorServicio($request);
         return $modelServicio;
     }
 }

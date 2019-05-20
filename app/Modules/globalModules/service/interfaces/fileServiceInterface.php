@@ -6,4 +6,5 @@ use Illuminate\Http\Request;
 interface fileServiceInterface
 {
     public  function fileUploadRequisito(Request $request);
+    public function elimnarArchivoRequisito(Request $request);
 }

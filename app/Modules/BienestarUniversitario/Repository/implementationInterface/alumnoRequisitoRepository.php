@@ -5,7 +5,6 @@ use App\Modules\BienestarUniversitario\Repository\interfaces\alumnoRequisitoRepo
 use App\Modules\BienestarUniversitario\Repository\Models\AlumnoRequisito;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use function GuzzleHttp\Promise\all;
 use App\Modules\BienestarUniversitario\Repository\Models\estadoArchivoRequisito;
 
 class alumnoRequisitoRepository implements alumnoRequisitoRepositoryInterface

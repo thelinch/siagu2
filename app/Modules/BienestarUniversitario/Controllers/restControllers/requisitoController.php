@@ -125,4 +125,12 @@ class requisitoController extends Controller
     {
         return $this->requisitoService->getArchivosPorRequisitoId($request);
     }
+    public function cambiarActualizacion(Request $request)
+    {
+        return $this->requisitoService->cambiarActualizacion($request);
+    }
+    public function listarArchivosPorServicio(Request $request)
+    {
+        return response()->json($this->requisitoService->listarArchivosPorServicio($request));
+    }
 }

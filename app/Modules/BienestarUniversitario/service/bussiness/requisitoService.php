@@ -47,4 +47,12 @@ class requisitoService implements requisitoServiceInterface
     {
         return $this->requisitoRepository->getArchivosPorRequisitoId($request);
     }
+    public function cambiarActualizacion(Request $request)
+    {
+        return $this->requisitoRepository->cambiarActualizacion($request);
+    }
+    public function listarArchivosPorServicio(Request $request)
+    {
+        return $this->requisitoRepository->listarArchivosPorServicio($request);
+    }
 }

@@ -101,4 +101,18 @@ class RequisitoRepository implements RequisitoRepositoryInterface
         $objetJson = $request->json()->all();
         return  $this->model->find($objetJson["id"])->archivos()->where("estado", 1)->get();
     }
+    public function cambiarActualizacion(Request $request)
+    {
+        $cuerpoPeticion = $request->json()->all();
+        $modelEdit = Requisito::find($cuerpoPeticion["idRequisito"]);
+        $modelEdit->actualizacion = $cuerpoPeticion["checked"];
+        $modelEdit->save();
+        return $modelEdit;
+    }
+    public function listarArchivosPorServicio(Request $request)
+    {
+        $cuerpoPeticion = $request->json()->all();
+        $requisito = Requisito::find($cuerpoPeticion["id"]);
+        return $requisito->archivos();
+    }
 }

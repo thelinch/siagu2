@@ -5,10 +5,10 @@ use Illuminate\Support\ServiceProvider;
 use App\Modules\globalModules\service\bussiness\alumnoService;
 use App\Modules\globalModules\service\interfaces\alumnoServiceInterface;
 use App\Modules\globalModules\service\bussiness\fileService;
-use App\Modules\globalModules\service\interfaces\fileServiceInterface;
 use App\Modules\globalModules\service\bussiness\cicloAcademicoService;
 use App\Modules\globalModules\service\interfaces\cicloAcademicoServiceInterface;
 use App\Modules\BienestarUniversitario\Repository\implementationInterface\servicioRepository;
+use App\Modules\BienestarUniversitario\Repository\implementationInterface\requisitoArchivoRepository;
 
 class serviceRegisterProvider extends ServiceProvider
 {
@@ -21,7 +21,7 @@ class serviceRegisterProvider extends ServiceProvider
         });
         $this->app->bind("fileService", function ($app) {
             return new fileService(
-                $app->make(fileServiceInterface::class)
+                $app->make(requisitoArchivoRepository::class)
             );
         });
         $this->app->bind("cicloAcademicoService", function ($app) {
