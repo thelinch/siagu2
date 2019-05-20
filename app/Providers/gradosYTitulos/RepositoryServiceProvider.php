@@ -24,6 +24,9 @@ use App\Modules\GradosyTitulos\Repository\implementationInterface\alumnoGraduado
 use App\Modules\GradosyTitulos\Repository\interfaces\registroAlumnoGraduadoTituladoRepositoryInterface;
 use App\Modules\GradosyTitulos\Repository\implementationInterface\registroAlumnoGraduadoTituladoRepository;
 
+use App\Modules\GradosyTitulos\Repository\interfaces\tipoDiplomaRepositoryInterface;
+use App\Modules\GradosyTitulos\Repository\implementationInterface\tipoDiplomaRepository;
+
 class RepositoryServiceProvider extends ServiceProvider
 {
     protected $defer = false;
@@ -63,6 +66,11 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(
             registroAlumnoGraduadoTituladoRepositoryInterface::class,
             registroAlumnoGraduadoTituladoRepository::class
+        );
+
+        $this->app->bind(
+            tipoDiplomaRepositoryInterface::class,
+            tipoDiplomaRepository::class
         );
     }
 }

@@ -4,6 +4,7 @@ namespace App\Modules\GradosyTitulos\Repository\Models;
 
 use  App\Modules\globalModules\Models\Persona;
 use Illuminate\Database\Eloquent\Model;
+use App\Modules\GradosyTitulos\Controllers\restControllers\registroAlumnoGraduadoTitulado;
 
 class alumnoGraduadoTitulado extends Model
 {
@@ -19,4 +20,6 @@ class alumnoGraduadoTitulado extends Model
     {
         return $this->belongsTo(trabajoInvestigacion::class);
     }
+    
+   
 }

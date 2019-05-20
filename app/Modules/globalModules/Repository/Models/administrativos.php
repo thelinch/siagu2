@@ -17,5 +17,8 @@ class administrativos extends Model
         return $this->belongsTo(Persona::class);
     }
 
-   
+    public function trabajadorAreas()
+    {
+        return $this->hasMany(trabajadorArea::class);
+    }
 }

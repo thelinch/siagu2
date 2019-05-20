@@ -2,9 +2,9 @@
 namespace App\Modules\globalModules\Repository\implementationInterface;
 
 use App\Modules\globalModules\Repository\interfaces\alumnoRepositoryInterface;
-use App\Modules\globalModules\Models\Alumno;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Modules\globalModules\Repository\Models\Alumno;
 
 class alumnoRepository implements alumnoRepositoryInterface
 {
@@ -49,4 +49,11 @@ class alumnoRepository implements alumnoRepositoryInterface
     }
     public function listarRequisitosPorAlumnoYSemestreActual(Request $request)
     { }
+    public function modificarElGradoPorAlumno(int $idAlumno)
+    {
+        $alumnoEdit =   $this->model::with(["persona.tipo_documento", "escuelaProfesional.facultad_oficina"])->where("id", $idAlumno)->get()->first();
+        $alumnoEdit->grado_alumno = false;
+        $alumnoEdit->save();
+        return $alumnoEdit;
+    }
 }

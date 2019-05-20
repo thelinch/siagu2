@@ -42,13 +42,13 @@ class registroAlumnoGraduadoTituladoRepository implements registroAlumnoGraduado
             "tipo_autoridad_id" => 1,
             "trabajador_areas_id" => $cuerpoPeticion["trabajador_areas"]["id"],
         ]);
-
-        return $this->model->where("id", "=", $registroAlumnoGraduadoTituladoCreado->id)->first();
+        //$trabajoInvestigacion = trabajoInvestigacion::updated($data["trabajo_investigacion"]);
+       return $this->model->with(["Rector","TrabajadorAreas.administrativo.Persona","TrabajadorAreas.cargo","TipoDiploma"])->where("id", $registroAlumnoGraduadoTituladoCreado->id)->get()->first();
+      //  return $this->model->where("id", "=", $registroAlumnoGraduadoTituladoCreado->id)->first();
     }
 
-    public function edit($id, array $data){
-
-    }
+    public function edit($id, array $data)
+    { }
     /*
     public function edit($id, array $data)
     {

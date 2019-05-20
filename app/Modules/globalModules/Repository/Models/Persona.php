@@ -35,4 +35,10 @@ class Persona extends Model
   {
     return $this->belongsTo(TiposDocumento::class);
   }
+
+  public function trabajadorAreas()
+  {
+    return $this->hasMany(trabajadorArea::class);
+  }
+
 }

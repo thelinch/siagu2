@@ -11,14 +11,13 @@
  */
 Route::group(['prefix' => 'gradostitulos', 'namespace' => 'App\Modules\GradosyTitulos\Controllers\restControllers'], function () {
     Route::get('/alumnos', ['as' => 'gradostitulos.index', 'uses' => 'alumnoController@alumnofiltradotipo']);
-    Route::post('/denominaciones/denominacionesPorEspecialidad', ['as' => 'gradostitulos.denominacionesPorEspecialidad', 'uses' => 'denominacionGradoController@listaDenominacionPorEscuelaProfesional']);
     Route::get('/nombreprograma/listaNombreprogramaEstudio', ['as' => 'gradostitulos.nombreProgramaBachiller', 'uses' => 'nombreProgramaestudioController@listaNombreprogramaEstudio']);
     Route::get('/modalidadestudio/listaModalidadEstudio', ['as' => 'gradostitulos.modalidadEstudioBachiller', 'uses' => 'modalidadEstudioController@listaModalidadEstudio']);
     Route::get('/obtenciongrado/listaObtencionGrado', ['as' => 'gradostitulos.obtencionGradoBachiller', 'uses' => 'obtencionGradoController@listaObtencionGrado']);
-    Route::post('/empresa/listaEmpresa', ['as' => 'gradostitulos.empresaBachiller', 'uses' => 'empresaController@listaEmpresa']);
-    
+   
+    Route::post('/denominaciones/denominacionesPorEspecialidad', ['as' => 'gradostitulos.denominacionesPorEspecialidad', 'uses' => 'denominacionGradoController@listaDenominacionPorEscuelaProfesional']);
+    Route::post('/empresa/listaEmpresa', ['as' => 'gradostitulos.empresaBachiller', 'uses' => 'empresaController@listaEmpresa']); 
     Route::post('/alumnoGraduado/create', ['as' => 'gradostitulos.create', 'uses' => 'alumnoGraduadoTitulado@create']);
     Route::post('/registroalumnograduado/create', ['as' => 'gradostitulos.create', 'uses' => 'registroAlumnoGraduadoTitulado@create']);
-
     Route::post('/alumnoGraduado/{id}/editar', ['as' => 'gradostitulos.edit', 'uses' => 'alumnoGraduadoTitulado@edit']);
 });

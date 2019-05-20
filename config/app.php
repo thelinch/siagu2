@@ -168,6 +168,7 @@ return [
         App\Providers\bienestarUniversitario\serviceRegisterProvider::class,
         App\Providers\bienestarUniversitario\RepositoryServiceProvider::class,
         App\Providers\gradosYTitulos\RepositoryServiceProvider::class,
+        App\Providers\gradosYTitulos\serviceRegisterProvider::class,
         /*
          * Package Service Providers...
          */

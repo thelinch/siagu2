@@ -12,4 +12,5 @@ interface alumnoRepositoryInterface extends crudRepository
     public function listaServiciosPorAlumno(Request $request);
     public function listaRequisitoPorAlumnoYCodigoMatricula(Request $request);
     public function listarRequisitosPorAlumnoYSemestreActual(Request $request);
+    public function modificarElGradoPorAlumno(int $idAlumno);
 }

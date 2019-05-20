@@ -3,6 +3,7 @@
 namespace App\Modules\globalModules\Repository\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Modules\GradosyTitulos\Repository\Models\registroAlumnoGraduadoTitulado;
 
 class Rector extends Model
 {
@@ -22,5 +23,8 @@ class Rector extends Model
         return $this->belongsTo(Docente::Class);
     }
 
-    
+    public function RegistroALumnoGraduadoTitulado()
+    {
+        return $this->belongsTo(registroAlumnoGraduadoTitulado::Class);
+    }
 }

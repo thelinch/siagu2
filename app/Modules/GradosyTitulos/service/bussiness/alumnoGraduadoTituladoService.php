@@ -4,6 +4,7 @@ namespace App\Modules\GradosyTitulos\service\bussiness;
 use Illuminate\Http\Request;
 use App\Modules\GradosyTitulos\service\interfaces\alumnoGraduadoTituladoServiceInterface;
 use App\Modules\GradosyTitulos\Repository\interfaces\alumnoGraduadoTituladoRepositoryInterface;
+use App\Modules\globalModules\Repository\interfaces\alumnoRepositoryInterface;
 
 class alumnoGraduadoTituladoService implements alumnoGraduadoTituladoServiceInterface
 {
@@ -20,7 +21,8 @@ class alumnoGraduadoTituladoService implements alumnoGraduadoTituladoServiceInte
     { }
     public function create(Request $data)
     {
-        return $this->repository->create($data);
+
+        return   $this->repository->create($data);
     }
     public function edit($id, array $data)
     {

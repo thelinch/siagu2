@@ -39,7 +39,7 @@ class alumnoGraduadoTituladoRepository implements alumnoGraduadoTituladoReposito
             "procedencia_bachiller" => $cuerpoPeticion["codigo_universidad"]["nombre"],
             "procednecia_titulo_pedagogico" => "NINGUNO",
             "fecha_ingreso" => Carbon::parse($cuerpoPeticion["fecha_ingreso"])->format("Y-m-d"),
-            "fecha_egreso" =>  Carbon::parse($cuerpoPeticion["fecha_egreso"])->format("Y-m-d"), 
+            "fecha_egreso" =>  Carbon::parse($cuerpoPeticion["fecha_egreso"])->format("Y-m-d"),
             "creditos_aprobados" => $cuerpoPeticion["creditos_aprobados"],
             "foto" => "dwdwd",
             "tipo_alumno_id" => 1,
@@ -54,17 +54,16 @@ class alumnoGraduadoTituladoRepository implements alumnoGraduadoTituladoReposito
             "grado_extranjero_id" => 1,
             "registro_programa_id" => 1
         ]);
-
-
         return $this->model->where("id", "=", $alumnoGraduadoTituladoCreado->id)->with("trabajoInvestigacion")->first();
     }
 
     public function edit($id, array $data)
     {
         $alumnoGraduadoTitulado = $this->find($id);
-        $trabajoInvestigacion = trabajoInvestigacion::updated($data["trabajo_investigacion"]);
-        //  $trabajoInvestigacion->nombre = $data["trabajo_investigacion"]["nombre"];
-        //$alumnoGraduadoTitulado->
+        $trabajoInvestigacion = trabajoInvestigacion::find($data["trabajo_investigacion"]["id"]);
+        $trabajoInvestigacion->nombre = $data["trabajo_investigacion"]["nombre"];
+        $trabajoInvestigacion->url = $data["trabajo_investigacion"]["url"];
+        $trabajoInvestigacion->save();
         $alumnoGraduadoTitulado->procedencia_bachiller = $data["codigo_universidad"]["nombre"];
         $alumnoGraduadoTitulado->fecha_ingreso =  Carbon::parse($data["fecha_ingreso"])->format("Y-m-d");
         $alumnoGraduadoTitulado->fecha_egreso = Carbon::parse($data["fecha_egreso"])->format("Y-m-d");
@@ -73,7 +72,6 @@ class alumnoGraduadoTituladoRepository implements alumnoGraduadoTituladoReposito
         $alumnoGraduadoTitulado->nombre_programa_estudio_id = $data["nombre_programa_estudio"]["id"];
         $alumnoGraduadoTitulado->modalidad_estudio_id = $data["modalidad_de_estudio"]["id"];
         $alumnoGraduadoTitulado->obtencion_grado_titulo_id = $data["obtencion_grado"]["id"];
-        
         $alumnoGraduadoTitulado->save();
         return $this->model->where("id", "=", $alumnoGraduadoTitulado->id)->with("trabajoInvestigacion")->first();
     }
