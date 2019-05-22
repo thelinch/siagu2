@@ -12,4 +12,9 @@ class empresa extends Model
     protected $casts = [
         "estado" => "boolean",
     ];
+
+    public function AlumnoGraduadoTitulado()
+    {
+        return $this->hasMany(alumnoGraduadoTitulado::class);
+    }
 }

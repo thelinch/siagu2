@@ -20,7 +20,7 @@ class alumnoGraduadoTituladoRepository implements alumnoGraduadoTituladoReposito
     { }
     public function find($id)
     {
-        return $this->model->find($id);
+        return $this->model->with("Empresa","trabajoInvestigacion","DenominacionGradoTitulo","NombreProgramaEstudio","ModalidadEstudio","ObtencionGradoTitulo")->find($id);
     }
     public function delete($id)
     { }

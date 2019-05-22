@@ -14,10 +14,11 @@ Route::group(['prefix' => 'gradostitulos', 'namespace' => 'App\Modules\GradosyTi
     Route::get('/nombreprograma/listaNombreprogramaEstudio', ['as' => 'gradostitulos.nombreProgramaBachiller', 'uses' => 'nombreProgramaestudioController@listaNombreprogramaEstudio']);
     Route::get('/modalidadestudio/listaModalidadEstudio', ['as' => 'gradostitulos.modalidadEstudioBachiller', 'uses' => 'modalidadEstudioController@listaModalidadEstudio']);
     Route::get('/obtenciongrado/listaObtencionGrado', ['as' => 'gradostitulos.obtencionGradoBachiller', 'uses' => 'obtencionGradoController@listaObtencionGrado']);
+    
    
     Route::post('/denominaciones/denominacionesPorEspecialidad', ['as' => 'gradostitulos.denominacionesPorEspecialidad', 'uses' => 'denominacionGradoController@listaDenominacionPorEscuelaProfesional']);
     Route::post('/empresa/listaEmpresa', ['as' => 'gradostitulos.empresaBachiller', 'uses' => 'empresaController@listaEmpresa']); 
-    Route::post('/alumnoGraduado/create', ['as' => 'gradostitulos.create', 'uses' => 'alumnoGraduadoTitulado@create']);
-    Route::post('/registroalumnograduado/create', ['as' => 'gradostitulos.create', 'uses' => 'registroAlumnoGraduadoTitulado@create']);
-    Route::post('/alumnoGraduado/{id}/editar', ['as' => 'gradostitulos.edit', 'uses' => 'alumnoGraduadoTitulado@edit']);
+    Route::post('/alumnoGraduado/create', ['as' => 'gradostitulos.create', 'uses' => 'alumnoGraduadoTituladoController@create']);
+    Route::post('/registroalumnograduado/create', ['as' => 'gradostitulos.create', 'uses' => 'registroAlumnoGraduadoTituladoController@create']);
+    Route::post('/alumnoGraduado/{id}/editar', ['as' => 'gradostitulos.edit', 'uses' => 'alumnoGraduadoTituladoController@edit']);
 });

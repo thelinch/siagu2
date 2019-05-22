@@ -12,4 +12,9 @@ class modalidad_estudio extends Model
     protected $casts = [
         "estado" => "boolean",
     ];
+
+    public function AlumnoGraduadoTitulado()
+    {
+        return $this->hasMany(alumnoGraduadoTitulado::class);
+    }
 }

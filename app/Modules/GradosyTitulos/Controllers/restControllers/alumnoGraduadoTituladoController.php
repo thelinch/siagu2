@@ -4,12 +4,12 @@ namespace  App\Modules\GradosyTitulos\Controllers\restControllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Modules\GradosyTitulos\service\bussiness\registroAlumnoGraduadoTituladoService;
+use App\Modules\GradosyTitulos\service\bussiness\alumnoGraduadoTituladoService;
 
-class registroAlumnoGraduadoTitulado extends Controller
+class alumnoGraduadoTituladoController extends Controller
 {
     private $service;
-    public function __construct(registroAlumnoGraduadoTituladoService $service)
+    public function __construct(alumnoGraduadoTituladoService $service)
     {
         $this->service = $service;
     }

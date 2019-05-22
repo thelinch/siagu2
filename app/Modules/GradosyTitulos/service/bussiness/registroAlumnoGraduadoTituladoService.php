@@ -36,7 +36,8 @@ class registroAlumnoGraduadoTituladoService implements registroAlumnoGraduadoTit
         $modelEdit = $this->alumnoRepository->modificarElGradoPorAlumno($modelAlumnoGraduadoTitulado->alumno_general_id);
         $datosEnviar = array(
             "alumno" => $modelEdit,
-            "alumno_graduado" => $this->repository->create($data)
+            "registro_alumno_graduado" => $this->repository->create($data),
+            "alumno_graduado" => $this->alumnoGraduadoRepository->find($cuerpoPeticion["alumno_graduado_id"]),
         );
         return $datosEnviar;
     }

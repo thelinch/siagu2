@@ -20,4 +20,8 @@ class denominacionGradoTitulo extends Model
     {
         return $this->belongsTo(mensionMaestria::class);
     }
+    public function AlumnoGraduadoTitulado()
+    {
+        return $this->hasMany(alumnoGraduadoTitulado::class);
+    }
 }

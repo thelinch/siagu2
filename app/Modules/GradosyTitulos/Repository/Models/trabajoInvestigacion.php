@@ -2,9 +2,9 @@
 
 namespace App\Modules\GradosyTitulos\Repository\Models;
 
-use  App\Modules\globalModules\Models\Persona;
+//use  App\Modules\globalModules\Models\Persona;
 use Illuminate\Database\Eloquent\Model;
-use App\Modules\GradosyTitulos\Controllers\restControllers\alumnoGraduadoTitulado;
+//use App\Modules\GradosyTitulos\Controllers\restControllers\alumnoGraduadoTitulado;
 
 class trabajoInvestigacion extends Model
 {
@@ -14,4 +14,15 @@ class trabajoInvestigacion extends Model
     {
         return  $this->hasMany(alumnoGraduadoTitulado::class);
     }
+
+    public function AlumnoGraduadoTitulado()
+    {
+        return $this->hasMany(alumnoGraduadoTitulado::class);
+    }
+
+    public function DenominacionGradoTitulo()
+    {
+        return $this->hasMany(denominacionGradoTitulo::class);
+    }
+
 }
