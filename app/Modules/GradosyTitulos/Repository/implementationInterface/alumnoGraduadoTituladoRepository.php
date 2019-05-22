@@ -1,12 +1,10 @@
 <?php
 namespace App\Modules\GradosyTitulos\Repository\implementationInterface;
 
-use App\Modules\BienestarUniversitario\Repository\Models\AlumnoExternoPosgrado;
 use Illuminate\Http\Request;
 use App\Modules\GradosyTitulos\Repository\interfaces\alumnoGraduadoTituladoRepositoryInterface;
 use App\Modules\GradosyTitulos\Repository\Models\alumnoGraduadoTitulado;
 use App\Modules\GradosyTitulos\Repository\Models\trabajoInvestigacion;
-use App\Modules\globalModules\Models\Alumno;
 use Carbon\Carbon;
 
 class alumnoGraduadoTituladoRepository implements alumnoGraduadoTituladoRepositoryInterface
@@ -20,7 +18,7 @@ class alumnoGraduadoTituladoRepository implements alumnoGraduadoTituladoReposito
     { }
     public function find($id)
     {
-        return $this->model->with("Empresa","trabajoInvestigacion","DenominacionGradoTitulo","NombreProgramaEstudio","ModalidadEstudio","ObtencionGradoTitulo")->find($id);
+        return $this->model->with(["Empresa","trabajoInvestigacion","DenominacionGradoTitulo.gradosTitulo","NombreProgramaEstudio","ModalidadEstudio","ObtencionGradoTitulo"])->find($id);
     }
     public function delete($id)
     { }
