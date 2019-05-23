@@ -18,7 +18,7 @@ class alumnoGraduadoTituladoRepository implements alumnoGraduadoTituladoReposito
     { }
     public function find($id)
     {
-        return $this->model->with(["Empresa","trabajoInvestigacion","DenominacionGradoTitulo.gradosTitulo","NombreProgramaEstudio","ModalidadEstudio","ObtencionGradoTitulo"])->find($id);
+        return $this->model->with(["Empresa","trabajoInvestigacion","DenominacionGradoTitulo.gradoTitulo","NombreProgramaEstudio","ModalidadEstudio","ObtencionGradoTitulo"])->find($id);
     }
     public function delete($id)
     { }
@@ -62,11 +62,11 @@ class alumnoGraduadoTituladoRepository implements alumnoGraduadoTituladoReposito
         $trabajoInvestigacion->nombre = $data["trabajo_investigacion"]["nombre"];
         $trabajoInvestigacion->url = $data["trabajo_investigacion"]["url"];
         $trabajoInvestigacion->save();
-        $alumnoGraduadoTitulado->procedencia_bachiller = $data["codigo_universidad"]["nombre"];
+        $alumnoGraduadoTitulado->procedencia_bachiller = $data["empresa_id"]["nombre"];
         $alumnoGraduadoTitulado->fecha_ingreso =  Carbon::parse($data["fecha_ingreso"])->format("Y-m-d");
         $alumnoGraduadoTitulado->fecha_egreso = Carbon::parse($data["fecha_egreso"])->format("Y-m-d");
         $alumnoGraduadoTitulado->creditos_aprobados = $data["creditos_aprobados"];
-        $alumnoGraduadoTitulado->empresa_id = $data["codigo_universidad"]["id"];
+        $alumnoGraduadoTitulado->empresa_id = $data["empresa_id"]["id"];
         $alumnoGraduadoTitulado->nombre_programa_estudio_id = $data["nombre_programa_estudio"]["id"];
         $alumnoGraduadoTitulado->modalidad_estudio_id = $data["modalidad_de_estudio"]["id"];
         $alumnoGraduadoTitulado->obtencion_grado_titulo_id = $data["obtencion_grado"]["id"];

@@ -25,6 +25,6 @@ class denominacionGradoRepository implements denominacionGradoRepositoryInterfac
     public function listaDenominacionPorEscuelaProfesionalYAlumnoBachiller(Request $request)
     {
         $cuerpoPeticion = $request->json()->all();
-        return $this->model->where("escuela_profesional_id", "=", $cuerpoPeticion["id"])->where("grado_titulo_id", 1)->with(["gradosTitulo"])->get();
+        return $this->model->where("escuela_profesional_id", "=", $cuerpoPeticion["id"])->where("grado_titulo_id", 1)->with(["gradoTitulo"])->get();
     }
 }

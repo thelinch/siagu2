@@ -12,7 +12,7 @@ class denominacionGradoTitulo extends Model
     {
         return $this->belongsTo(EscuelaProfesionale::class);
     }
-    public function gradosTitulo()
+    public function gradoTitulo()
     {
         return $this->belongsTo(gradoTitulo::class);
     }
