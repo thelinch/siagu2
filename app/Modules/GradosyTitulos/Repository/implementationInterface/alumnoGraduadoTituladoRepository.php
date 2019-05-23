@@ -34,14 +34,14 @@ class alumnoGraduadoTituladoRepository implements alumnoGraduadoTituladoReposito
 
         $alumnoGraduadoTituladoCreado = $this->model::create([
             "alumno_general_id" => $cuerpoPeticion["alumno_general_id"],
-            "procedencia_bachiller" => $cuerpoPeticion["codigo_universidad"]["nombre"],
+            "procedencia_bachiller" => $cuerpoPeticion["empresa_id"]["nombre"],
             "procednecia_titulo_pedagogico" => "NINGUNO",
             "fecha_ingreso" => Carbon::parse($cuerpoPeticion["fecha_ingreso"])->format("Y-m-d"),
             "fecha_egreso" =>  Carbon::parse($cuerpoPeticion["fecha_egreso"])->format("Y-m-d"),
             "creditos_aprobados" => $cuerpoPeticion["creditos_aprobados"],
             "foto" => "dwdwd",
             "tipo_alumno_id" => 1,
-            "empresa_id" => $cuerpoPeticion["codigo_universidad"]["id"],
+            "empresa_id" => $cuerpoPeticion["empresa_id"]["id"],
             "trabajo_investigacion_id" => $trabajoInvestigacionCreado->id,
             "denominacion_grado_titulo_id" => $cuerpoPeticion["denominacion_grado_titulo"]["id"],
             "nombre_programa_estudio_id" => $cuerpoPeticion["nombre_programa_estudio"]["id"],

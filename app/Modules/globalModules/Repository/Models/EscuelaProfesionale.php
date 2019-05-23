@@ -4,6 +4,7 @@
 namespace App\Modules\globalModules\Repository\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Modules\GradosyTitulos\Repository\Models\denominacionGradoTitulo;
 
 class EscuelaProfesionale extends Model
 {
@@ -19,5 +20,10 @@ class EscuelaProfesionale extends Model
     public function facultad_oficina()
     {
         return $this->belongsTo(FacultadOficina::class);
+    }
+
+    public function denominacionGrado()
+    {
+        return $this->hasMany(denominacionGradoTitulo::class);
     }
 }

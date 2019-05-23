@@ -3,7 +3,7 @@
 namespace App\Modules\GradosyTitulos\Repository\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Modules\globalModules\Models\EscuelaProfesionale;
+use App\Modules\globalModules\Repository\Models\EscuelaProfesionale;
 
 class denominacionGradoTitulo extends Model
 {
@@ -18,7 +18,7 @@ class denominacionGradoTitulo extends Model
     }
     public function mensionMaestria()
     {
-        return $this->belongsTo(mensionMaestria::class);
+        return $this->belongsTo(mensioneMaestria::class);
     }
     public function AlumnoGraduadoTitulado()
     {
