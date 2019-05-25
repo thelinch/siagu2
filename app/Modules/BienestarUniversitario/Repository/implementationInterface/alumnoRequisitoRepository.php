@@ -2,7 +2,7 @@
 namespace App\Modules\BienestarUniversitario\Repository\implementationInterface;
 
 use App\Modules\BienestarUniversitario\Repository\interfaces\alumnoRequisitoRepositoryInterface;
-use App\Modules\BienestarUniversitario\Repository\Models\AlumnoRequisito;
+use App\Modules\BienestarUniversitario\Repository\Models\ServicioSolicitadoRequisito;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Modules\BienestarUniversitario\Repository\Models\estadoArchivoRequisito;
@@ -10,7 +10,7 @@ use App\Modules\BienestarUniversitario\Repository\Models\estadoArchivoRequisito;
 class alumnoRequisitoRepository implements alumnoRequisitoRepositoryInterface
 {
     private $model;
-    public function __construct(AlumnoRequisito $model)
+    public function __construct(ServicioSolicitadoRequisito $model)
     {
         $this->model = $model;
     }

@@ -9,12 +9,13 @@ class ServicioSolicitado extends Model
 {
     //
     protected $table = "servicio_solicitados";
-    protected $fillable = ["alumno_id", "estado_servicio_id", "fechaRegistro", "codigoMatricula"];
+    protected $fillable = ["alumno_id", "estado_servicio_id", "fechaRegistro", "codigoMatricula", "priorizacion"];
     protected $date = [
         "fechaRegistro"
     ];
     protected $casts = [
-        "estado" => "boolean"
+        "estado" => "boolean",
+        "priorizacion" => "boolean"
     ];
     public function estadoServicio()
     {

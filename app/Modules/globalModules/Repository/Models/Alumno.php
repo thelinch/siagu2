@@ -28,10 +28,6 @@ class Alumno extends Model
         return $this->belongsTo(Persona::class);
     }
  
-    public function requisitos()
-    {
-        return $this->belongsToMany(Requisito::class, "alumno_requisitos", "alumno_id", "requisito_id")->withPivot("codigoMatricula", "fechaRegistro");
-    }
     public function alumnoRequisitos()
     {
         return $this->hasMany(AlumnoRequisito::class);
