@@ -6,6 +6,7 @@ use App\Modules\GradosyTitulos\service\interfaces\registroAlumnoGraduadoTitulado
 use App\Modules\GradosyTitulos\Repository\interfaces\registroAlumnoGraduadoTituladoRepositoryInterface;
 use App\Modules\globalModules\Repository\interfaces\alumnoRepositoryInterface;
 use App\Modules\GradosyTitulos\Repository\interfaces\alumnoGraduadoTituladoRepositoryInterface;
+use App\Modules\globalModules\Repository\interfaces\decanoFacultadRepositoryInterface;
 
 class registroAlumnoGraduadoTituladoService implements registroAlumnoGraduadoTituladoServiceInterface
 {
@@ -13,12 +14,15 @@ class registroAlumnoGraduadoTituladoService implements registroAlumnoGraduadoTit
     private $alumnoRepository;
     private $modelAlumno;
     private $alumnoGraduadoRepository;
+    private $decanoFacultadRepository;
     public  function __construct(
         registroAlumnoGraduadoTituladoRepositoryInterface $registroAlumnoGraduadoTituladoRepositoryInterface,
         alumnoRepositoryInterface $alumnoRepository,
-        alumnoGraduadoTituladoRepositoryInterface $alumnoGraduadoTituladoRepository
-    ) {
+        alumnoGraduadoTituladoRepositoryInterface $alumnoGraduadoTituladoRepository,
+        decanoFacultadRepositoryInterface $decanoFacultadRepository
 
+    ) {
+        $this->decanoFacultadRepository = $decanoFacultadRepository;
         $this->repository = $registroAlumnoGraduadoTituladoRepositoryInterface;
         $this->alumnoRepository = $alumnoRepository;
         $this->alumnoGraduadoRepository = $alumnoGraduadoTituladoRepository;
@@ -38,6 +42,7 @@ class registroAlumnoGraduadoTituladoService implements registroAlumnoGraduadoTit
             "alumno" => $modelEdit,
             "registro_alumno_graduado" => $this->repository->create($data),
             "alumno_graduado" => $this->alumnoGraduadoRepository->find($cuerpoPeticion["alumno_graduado_id"]),
+            "decano" => $this->decanoFacultadRepository->find($cuerpoPeticion["director_decano"]["id"])
         );
         return $datosEnviar;
     }

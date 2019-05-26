@@ -8,6 +8,9 @@ use App\Modules\globalModules\Repository\implementationInterface\cicloAcademicoR
 use App\Modules\globalModules\Repository\interfaces\alumnoRepositoryInterface;
 use App\Modules\globalModules\Repository\interfaces\fileRepositoryInterface;
 use App\Modules\globalModules\Repository\interfaces\cicloAcademicoRepositoryInterface;
+use App\Modules\globalModules\Repository\interfaces\decanoFacultadRepositoryInterface;
+use App\Modules\globalModules\Repository\implementationInterface\decanoFacultadRepository;
+
 
 class RepositoryServiceProvider extends ServiceProvider
 {
@@ -25,6 +28,10 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(
             cicloAcademicoRepositoryInterface::class,
             cicloAcademicoRepository::class
+        );
+        $this->app->bind(
+            decanoFacultadRepositoryInterface::class,
+            decanoFacultadRepository::class
         );
     }
 }

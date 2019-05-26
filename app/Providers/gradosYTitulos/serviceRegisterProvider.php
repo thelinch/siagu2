@@ -11,6 +11,7 @@ use App\Modules\GradosyTitulos\service\interfaces\registroAlumnoGraduadoTitulado
 use App\Modules\GradosyTitulos\service\bussiness\registroAlumnoGraduadoTituladoService;
 use App\Modules\globalModules\Repository\implementationInterface\alumnoRepository;
 use App\Modules\GradosyTitulos\Repository\implementationInterface\alumnoGraduadoTituladoRepository;
+use App\Modules\globalModules\Repository\implementationInterface\decanoFacultadRepository;
 
 class serviceRegisterProvider extends ServiceProvider
 {
@@ -49,7 +50,8 @@ class serviceRegisterProvider extends ServiceProvider
             return new registroAlumnoGraduadoTituladoService(
                 $app->make(registroAlumnoGraduadoTituladoServiceInterface::class),
                 $app->make(alumnoRepository::class),
-                $app->make(alumnoGraduadoTituladoRepository::class)
+                $app->make(alumnoGraduadoTituladoRepository::class),
+                $app->make(decanoFacultadRepository::class)
             );
         });
     }

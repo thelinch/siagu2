@@ -24,16 +24,9 @@ class FileController extends Controller
     { }
     public function  fileUpload(Request $request)
     {
-        $file = $request->file("archivo");
-        $nombre = $file->getClientOriginalName();
-        $nombreCarpeta = $request->nombreCarpeta;
-        if (!\Storage::disk("local")->has($nombreCarpeta)) {
-            \Storage::makeDirectory($nombreCarpeta, 0775, true);
-        }
-        //\Storage::disk('local')->put($nombre,  \File::get($file));
-        \Storage::disk('local')->put($nombreCarpeta . "/" . $nombre, \File::get($file));
 
-        return response()->json("archivo guardado", 200);
+
+        return $this->service->fileUpload(($request));
     }
     /** $request archivo que servira como modelo para los requisitos 
      * @Return Url:string 

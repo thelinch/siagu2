@@ -18,7 +18,7 @@ class alumnoGraduadoTituladoRepository implements alumnoGraduadoTituladoReposito
     { }
     public function find($id)
     {
-        return $this->model->with(["Empresa","trabajoInvestigacion","DenominacionGradoTitulo.gradoTitulo","NombreProgramaEstudio","ModalidadEstudio","ObtencionGradoTitulo"])->find($id);
+        return $this->model->with(["Empresa", "trabajoInvestigacion", "DenominacionGradoTitulo.gradoTitulo", "NombreProgramaEstudio", "ModalidadEstudio", "ObtencionGradoTitulo"])->find($id);
     }
     public function delete($id)
     { }
@@ -39,7 +39,7 @@ class alumnoGraduadoTituladoRepository implements alumnoGraduadoTituladoReposito
             "fecha_ingreso" => Carbon::parse($cuerpoPeticion["fecha_ingreso"])->format("Y-m-d"),
             "fecha_egreso" =>  Carbon::parse($cuerpoPeticion["fecha_egreso"])->format("Y-m-d"),
             "creditos_aprobados" => $cuerpoPeticion["creditos_aprobados"],
-            "foto" => "dwdwd",
+            "foto" => $cuerpoPeticion["foto"],
             "tipo_alumno_id" => 1,
             "empresa_id" => $cuerpoPeticion["empresa_id"]["id"],
             "trabajo_investigacion_id" => $trabajoInvestigacionCreado->id,

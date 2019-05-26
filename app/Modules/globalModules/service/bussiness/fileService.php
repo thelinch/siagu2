@@ -13,6 +13,21 @@ class fileService implements fileServiceInterface
     {
         $this->archivoRequisitoRepository = $archivoRequisitoRepository;
     }
+
+    public function fileUpload(Request $request)
+    {
+        $file = $request->file("archivo");
+        $nombre = $file->getClientOriginalName();
+        $nombreCarpeta = $request->nombreCarpeta;
+        if (!\Storage::disk("public")->has($nombreCarpeta)) {
+            \Storage::makeDirectory($nombreCarpeta, 0775, true);
+        }
+        $nombreSistema = $request->id;
+        $extension = $file->extension();
+        \Storage::disk('public')->put($nombreCarpeta . "/" . $nombreSistema . "." . $extension, \File::get($file));
+        $url = \Storage::url($nombreCarpeta . "/" . $nombreSistema . "." . $extension);
+        return $url;
+    }
     public  function fileUploadRequisito(Request $request)
     {
         $nombreCarpeta = $request->nombreCarpeta;

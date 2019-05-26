@@ -12,10 +12,7 @@ class DecanoFacultad extends Model
         "estado" => "boolean",
     ];
 
-    public function Persona()
-    {
-        return $this->belongsTo(Persona::class);
-    }
+  
 
     public function Docente()
     {
