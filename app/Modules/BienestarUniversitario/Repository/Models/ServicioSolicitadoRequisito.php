@@ -6,10 +6,10 @@ use App\Modules\bienestarUniversitario\Repository\Models\Requisito;
 use App\Modules\globalModules\Models\Alumno;
 use Illuminate\Database\Eloquent\Model;
 
-class AlumnoRequisito extends Model
+class ServicioSolicitadoRequisito extends Model
 {
     //
-    protected $table = "alumno_requisitos";
+    protected $table = "servicio_solicitado_requisitos";
     protected $fillable = ["codigoMatricula", "fechaRegistro"];
     public function archivos()
     {
@@ -18,9 +18,5 @@ class AlumnoRequisito extends Model
     public function requisito()
     {
         return $this->belongsTo(Requisito::Class, "requisito_id");
-    }
-    public function alumno()
-    {
-        return $this->belongsTo(Alumno::class, "alumno_id");
     }
 }

@@ -103,12 +103,29 @@ class servicioRepository implements ServicioRepositoryInterface
         $requisitosRegistrados = collect($requisitosRegistrados)->map(function ($item, $key) {
             return     $item->id;
         });
-        $requisitos = DB::table('servicios')
+        /*$requisitos = DB::table('servicios')
             ->join("serviciorequisitos", "serviciorequisitos.servicio_id", "=", "servicios.id")
             ->join("requisitos", "requisitos.id", "=", "serviciorequisitos.requisito_id")
             ->join("requisitotipos", "requisitotipos.requisito_id", "=", "requisitos.id")
-            ->join("tipos", "tipos.id", "=", "requisitotipos.tipo_id")->select("requisitos.*")->distinct()
-            ->whereIn("serviciorequisitos.servicio_id", $listaServiciosSolicitados)->whereNotIn("serviciorequisitos.requisito_id", $requisitosRegistrados)->where("serviciorequisitos.estado", "=", 1)->where("tipos.id", "=", 1)->orderBy("requisitos.requerido", "DESC")->get();
+            ->join("requisito_archivos", "requisitos.id", "=", "requisito_archivos.requisito_id")
+            ->join("tipos", "tipos.id", "=", "requisitotipos.tipo_id")->select(
+                ["requisitos.id", "requisitos.nombre", "requisitos.nombreArchivo", "requisitos.prioridad", "requisitos.tipoArchivo", "requisitos.descripcion", "requisitos.actualizacion", "requisitos.requerido", "requisito_archivos.*"]
+            )->distinct()
+            ->whereIn("serviciorequisitos.servicio_id", $listaServiciosSolicitados)
+            ->whereNotIn("serviciorequisitos.requisito_id", $requisitosRegistrados)
+            ->where("serviciorequisitos.estado", "=", 1)
+            ->where("requisito_archivos.estado", "=", 1)
+            ->where("tipos.id", "=", 1)->orderBy("requisitos.requerido", "DESC")->get();*/
+        $requisitos =   Servicio::join("serviciorequisitos", "serviciorequisitos.servicio_id", "=", "servicios.id")
+            ->join("requisitos", "requisitos.id", "=", "serviciorequisitos.requisito_id")
+            ->join("requisitotipos", "requisitotipos.requisito_id", "=", "requisitos.id")
+            ->join("requisito_archivos", "requisitos.id", "=", "requisito_archivos.requisito_id")
+            ->join("tipos", "tipos.id", "=", "requisitotipos.tipo_id")
+            ->whereIn("servicios.id", $listaServiciosSolicitados)
+            ->where("serviciorequisitos.estado", "=", 1)
+            ->whereNotIn("serviciorequisitos.requisito_id", $requisitosRegistrados)
+            ->where("requisito_archivos.estado", "=", 1)
+            ->where("tipos.id", "=", 1)->get();
         return $requisitos;
     }
 
@@ -148,5 +165,4 @@ class servicioRepository implements ServicioRepositoryInterface
         $modelEdit->save();
         return Servicio::with(["cicloAcademicoActual.cicloAcademico"])->where("id", $modelEdit->id)->get()->first();
     }
-  
 }
