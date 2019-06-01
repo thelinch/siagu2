@@ -46,4 +46,16 @@ class servicioSolicitadoRepository implements servicioSolicitadoRepositoryInterf
         }
         return $this->find($servicioSolicitado->id)->with(["servicios", "estadoServicio"])->first();
     }
+    public function listarRequisitosRegistradosComedorYInternadoPorAlumnoYSemestreActual(int $idAlumno, string $codigoMatricula)
+    {
+        $listaServicioSolicitado = $this->model::whereHas("servicios", function ($q) {
+            $q->whereIn("nombre", ["COMEDOR", "INTERNADO"]);
+        })->where([["alumno_id", "=", $idAlumno], ["codigoMatricula", "=", $codigoMatricula]])->first();
+        if (!is_null($listaServicioSolicitado)) {
+            return $this->model->find($listaServicioSolicitado->id)->serviciSolicitadoRequisitos()->get()->map(function ($servicioSolicitadoRequisito) {
+                return $servicioSolicitadoRequisito->requisito_id;
+            });
+        }
+        return [];
+    }
 }

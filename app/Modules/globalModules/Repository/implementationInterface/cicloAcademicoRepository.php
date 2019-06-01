@@ -37,4 +37,8 @@ class cicloAcademicoRepository implements cicloAcademicoRepositoryInterface
             "ciclo_academico_id" => $cuerpoPeticion["idCicloAcademico"]
         ]);
     }
+    public function cicloAcademicoActual()
+    {
+        return $this->model->where("actual", true)->first();
+    }
 }

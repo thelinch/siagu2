@@ -29,4 +29,8 @@ class ServicioSolicitado extends Model
     {
         return  $this->belongsTo(Alumno::class);
     }
+    public function serviciSolicitadoRequisitos()
+    {
+        return $this->hasMany(ServicioSolicitadoRequisito::class);
+    }
 }

@@ -49,7 +49,7 @@ class servicioController extends Controller
     }
     public function requisitosPorArrayServicio(Request $arrayServicio)
     {
-        return response()->json($this->serviceService->requisitosPorArrayServicio($arrayServicio));
+        return response()->json($this->serviceService->listarRequisitosDeComedorYInternadoYTipoAlumno($arrayServicio));
     }
     /* public function registroServiciosPorAlumno(Request $request)
     {

@@ -15,6 +15,7 @@ class Alumno extends Model
         "estado" => "boolean",
         "grado_alumno" => "boolean",
     ];
+    protected $fillable = ['codigo',"correo_institucional","escuela_profesional_id" ,"tipo_alumno_id"];
     public function serviciosSolicitados()
     {
         return $this->hasMany(ServicioSolicitado::class);
@@ -27,7 +28,7 @@ class Alumno extends Model
     {
         return $this->belongsTo(Persona::class);
     }
- 
+
     public function alumnoRequisitos()
     {
         return $this->hasMany(AlumnoRequisito::class);
@@ -36,5 +37,4 @@ class Alumno extends Model
     {
         return $this->belongsTo(tipoAlumno::class);
     }
-    
 }
