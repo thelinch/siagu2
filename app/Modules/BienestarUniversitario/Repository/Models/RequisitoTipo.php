@@ -8,5 +8,9 @@ class RequisitoTipo extends Model
 {
     protected $table = "requisitotipos";
     protected $fillable = ['requisito_id', 'tipo_id', 'estado'];
+    protected $casts = [
+        "estado" => "boolean",
+        "actualizacion" => "boolean"
+    ];
     //
 }
