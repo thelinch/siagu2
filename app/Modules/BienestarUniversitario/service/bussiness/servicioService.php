@@ -9,6 +9,7 @@ use App\Modules\BienestarUniversitario\Repository\interfaces\servicioSolicitadoR
 use App\Modules\globalModules\Repository\interfaces\alumnoRepositoryInterface;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Carbon;
+use App\Modules\bienestarUniversitario\Repository\Models\Requisito;
 
 class servicioService implements servicioServiceInterface
 {
@@ -69,39 +70,45 @@ class servicioService implements servicioServiceInterface
         $listaRequisitosPorListaServicios = $this->repositoy->listarRequisitosPorListaDeServicio(array(1, 2));
         $listaRequisitoPorTipoAlumno = $this->filtradoRequisitoPorElTipoAlumno($tipoAlumno->nombre, $listaRequisitosPorListaServicios);
         $requisitos = collect();
+        $entro = "ddw";
         $cicloAcademicoActual = $this->cicloAcademicoRepository->cicloAcademicoActual();
         $requisitosRegistradosPorCicloActual = $this->servicioSolicitadoRepository->listarRequisitosRegistradosComedorYInternadoPorAlumnoYSemestreActual(1, $cicloAcademicoActual->nombre);
         if ($tipoAlumno->nombre == "ANTIGUO") {
-            //$requisitos=
-            $fechaHoy = Carbon::now();
+            $fechaActual = Carbon::now();
+            $listaRequisitoParaAntiguo = collect();
             $listaRequisitoRegistradoPorServicioSolicitadoPorAlumno = $this->servicioSolicitadoRepository->listaRequisitosRegistradoDelServicioSolicitadoMasActualPorAlumno(1);
             foreach ($listaRequisitoRegistradoPorServicioSolicitadoPorAlumno as $requisitoPorServicio) {
-                
-             }
-            /*  foreach ($listaRequisitoPorTipoAlumno as $requisitoPorAlumno) {
-               $indiceDeTipo = $requisitoPorAlumno->tipos->search(function ($tipo) {
-                    return $tipo->pivot->actualizacion;
-                });
-                if (is_numeric($indiceDeTipo)) {
-
-                    $requisitoPorAlumno->tipos[$indiceDeTipo]->numero_anios_actualizacion;
+                $requisitoSeleccionado =  $listaRequisitoPorTipoAlumno->filter(function ($requisito) use ($requisitoPorServicio) {
+                    return $requisito->id == $requisitoPorServicio->requisito_id;
+                })->first();
+                if (!is_null($requisitoSeleccionado)) {
+                    $pivotTipoAlumno = collect($requisitoSeleccionado["tipos"])->first(function ($tipo) {
+                        return $tipo->nombre == "ANTIGUO";
+                    })["pivot"];
+                    if ($pivotTipoAlumno["actualizacion"] && $this->validarAntiguedadDelRequisito($pivotTipoAlumno["numero_anios_actualizacion"], $requisitoPorServicio->fechaRegistro, $fechaActual)) {
+                        $listaRequisitoParaAntiguo->push($requisitoSeleccionado);
+                    }
                 }
             }
-            */
-            return $this->servicioSolicitadoRepository->listaRequisitosRegistradoDelServicioSolicitadoMasActualPorAlumno(1);
+            if (count($listaRequisitoPorTipoAlumno) > count($listaRequisitoRegistradoPorServicioSolicitadoPorAlumno)) {
+                $diferenciaLista =   $listaRequisitoPorTipoAlumno->whereNotIn("id", $listaRequisitoRegistradoPorServicioSolicitadoPorAlumno->map(function ($requisitoServicio) {
+                    return $requisitoServicio->requisito_id;
+                }));
+                $listaRequisitoParaAntiguo = $listaRequisitoParaAntiguo->concat($diferenciaLista);
+            }
+            return $listaRequisitoParaAntiguo;
         } else {
             $requisitosRegistradosPorCicloActual = $requisitosRegistradosPorCicloActual->map(function ($servicioSolicitadoRequisito) {
                 return $servicioSolicitadoRequisito->requisito_id;
             });
             $requisitos = $listaRequisitoPorTipoAlumno->whereNotIn("id", $requisitosRegistradosPorCicloActual)->toArray();
         }
-
         return  array_merge($requisitos);
     }
-    /*public function registroServiciosPorAlumno(Request $request)
+    private function validarAntiguedadDelRequisito(int $numero_anios_antiguedad,  $fechaRegistroRequisito, $fechaActual)
     {
-        return $this->repositoy->registroServiciosPorAlumno($request);
-    }*/
+        return $fechaActual->diffInYears($fechaRegistroRequisito) >= $numero_anios_antiguedad;
+    }
     private function filtradoRequisitoPorElTipoAlumno(string $tipoAlumno,  $listaRequisitosPorListaServicios)
     {
         $arrayLlenado = collect();

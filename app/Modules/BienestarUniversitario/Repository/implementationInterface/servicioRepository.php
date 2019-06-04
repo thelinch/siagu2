@@ -99,7 +99,7 @@ class servicioRepository implements ServicioRepositoryInterface
             })->flatten()->unique("id");
 
 
-        return  $requisitosPorListaDeServicios;
+        return  $requisitosPorListaDeServicios->merge([]);
     }
 
     public function listaServiciosPorAlumno(Request $request)
