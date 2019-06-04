@@ -5,9 +5,9 @@ namespace App\Modules\globalModules\Repository\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class tipoAlumno extends Model
+class TipoAlumno extends Model
 {
-    protected $table = "tipos_alumnos";
+    protected $table = "tipo_alumnos";
     protected $fillable = ['nombre', "estado"];
     public function alumnos()
     {

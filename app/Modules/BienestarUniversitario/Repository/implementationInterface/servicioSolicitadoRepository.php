@@ -50,12 +50,20 @@ class servicioSolicitadoRepository implements servicioSolicitadoRepositoryInterf
     {
         $listaServicioSolicitado = $this->model::whereHas("servicios", function ($q) {
             $q->whereIn("nombre", ["COMEDOR", "INTERNADO"]);
-        })->where([["alumno_id", "=", $idAlumno], ["codigoMatricula", "=", $codigoMatricula]])->first();
+        })->where([["alumno_id", "=", $idAlumno], ["codigoMatricula", "=",  $codigoMatricula]])->first();
         if (!is_null($listaServicioSolicitado)) {
-            return $this->model->find($listaServicioSolicitado->id)->serviciSolicitadoRequisitos()->get()->map(function ($servicioSolicitadoRequisito) {
-                return $servicioSolicitadoRequisito->requisito_id;
-            });
+            return $this->model->find($listaServicioSolicitado->id)->serviciSolicitadoRequisitos()->get();
         }
         return [];
+    }
+    public function listaRequisitosRegistradoDelServicioSolicitadoMasActualPorAlumno(int $idAlumno)
+    {
+        $servicioSolicitadoMasActualConRequisitos = $this->model::has("serviciSolicitadoRequisitos")->whereHas("servicios", function ($q) {
+            $q->whereIn("nombre", ["COMEDOR", "INTERNADO"]);
+        })->where("alumno_id", "=", $idAlumno)->orderBy("fechaRegistro", "desc")->first();
+        if (!is_null($servicioSolicitadoMasActualConRequisitos)) {
+            return $this->model->find($servicioSolicitadoMasActualConRequisitos->id)->serviciSolicitadoRequisitos()->get();
+        }
+        return null;
     }
 }

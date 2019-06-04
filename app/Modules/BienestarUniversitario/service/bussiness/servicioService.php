@@ -8,6 +8,7 @@ use App\Modules\globalModules\Repository\interfaces\cicloAcademicoRepositoryInte
 use App\Modules\BienestarUniversitario\Repository\interfaces\servicioSolicitadoRepositoryInterface;
 use App\Modules\globalModules\Repository\interfaces\alumnoRepositoryInterface;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Carbon;
 
 class servicioService implements servicioServiceInterface
 {
@@ -64,26 +65,56 @@ class servicioService implements servicioServiceInterface
     }
     public function listarRequisitosDeComedorYInternadoYTipoAlumno(Request $request)
     {
-        $alumno = $this->alumnoRepository->buscarAlumnoPorIdConTipoAlumno(1);
+        $tipoAlumno = $this->alumnoRepository->tipoAlumnoPorIdAlumno(1);
         $listaRequisitosPorListaServicios = $this->repositoy->listarRequisitosPorListaDeServicio(array(1, 2));
+        $listaRequisitoPorTipoAlumno = $this->filtradoRequisitoPorElTipoAlumno($tipoAlumno->nombre, $listaRequisitosPorListaServicios);
         $requisitos = collect();
         $cicloAcademicoActual = $this->cicloAcademicoRepository->cicloAcademicoActual();
-        if ($alumno["tipo_alumno"]["nombre"] == "ANTIGUO") {
-            $requisitos = $listaRequisitosPorListaServicios->filter(function ($requisito) {
-                return $requisito->tipos->contains("nombre", "ANTIGUO") || $requisito->actualizacion;
-            });
+        $requisitosRegistradosPorCicloActual = $this->servicioSolicitadoRepository->listarRequisitosRegistradosComedorYInternadoPorAlumnoYSemestreActual(1, $cicloAcademicoActual->nombre);
+        if ($tipoAlumno->nombre == "ANTIGUO") {
+            //$requisitos=
+            $fechaHoy = Carbon::now();
+            $listaRequisitoRegistradoPorServicioSolicitadoPorAlumno = $this->servicioSolicitadoRepository->listaRequisitosRegistradoDelServicioSolicitadoMasActualPorAlumno(1);
+            foreach ($listaRequisitoRegistradoPorServicioSolicitadoPorAlumno as $requisitoPorServicio) {
+                
+             }
+            /*  foreach ($listaRequisitoPorTipoAlumno as $requisitoPorAlumno) {
+               $indiceDeTipo = $requisitoPorAlumno->tipos->search(function ($tipo) {
+                    return $tipo->pivot->actualizacion;
+                });
+                if (is_numeric($indiceDeTipo)) {
+
+                    $requisitoPorAlumno->tipos[$indiceDeTipo]->numero_anios_actualizacion;
+                }
+            }
+            */
+            return $this->servicioSolicitadoRepository->listaRequisitosRegistradoDelServicioSolicitadoMasActualPorAlumno(1);
         } else {
-            $requisitosRegistrados = $this->servicioSolicitadoRepository->listarRequisitosRegistradosComedorYInternadoPorAlumnoYSemestreActual($alumno->id, $cicloAcademicoActual->nombre);
-            $requisitos = $listaRequisitosPorListaServicios->filter(function ($requisito) {
-                return $requisito->tipos->contains("nombre", "INGRESANTE");
-            })->whereNotIn("id", $requisitosRegistrados)->toArray();
+            $requisitosRegistradosPorCicloActual = $requisitosRegistradosPorCicloActual->map(function ($servicioSolicitadoRequisito) {
+                return $servicioSolicitadoRequisito->requisito_id;
+            });
+            $requisitos = $listaRequisitoPorTipoAlumno->whereNotIn("id", $requisitosRegistradosPorCicloActual)->toArray();
         }
-        return  $requisitos;
+
+        return  array_merge($requisitos);
     }
     /*public function registroServiciosPorAlumno(Request $request)
     {
         return $this->repositoy->registroServiciosPorAlumno($request);
     }*/
+    private function filtradoRequisitoPorElTipoAlumno(string $tipoAlumno,  $listaRequisitosPorListaServicios)
+    {
+        $arrayLlenado = collect();
+        foreach ($listaRequisitosPorListaServicios as $requisitoServicio) {
+            $busqueda = $requisitoServicio->tipos->contains(function ($tipo) use ($tipoAlumno) {
+                return $tipo->nombre == $tipoAlumno;
+            });
+            if ($busqueda) {
+                $arrayLlenado->push($requisitoServicio);
+            }
+        }
+        return $arrayLlenado;
+    }
     public function listaServiciosPorAlumno(Request $request)
     {
         return $this->repositoy->listaServiciosPorAlumno($request);
