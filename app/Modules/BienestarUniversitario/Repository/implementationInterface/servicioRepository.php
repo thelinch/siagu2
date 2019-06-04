@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 use App\Modules\BienestarUniversitario\Repository\Models\cicloAcademicoServicios;
+use App\Modules\bienestarUniversitario\Repository\Models\Requisito;
 
 class servicioRepository implements ServicioRepositoryInterface
 {
@@ -94,11 +95,11 @@ class servicioRepository implements ServicioRepositoryInterface
     {
         $requisitosPorListaDeServicios = Servicio::with(["requisitos.archivos", "requisitos.tipos"])
             ->whereIn("id", $listaServicios)->get()->map(function ($servicio) {
-                return  $servicio->requisitos;
+                return $servicio->requisitos;
             })->flatten()->unique("id");
 
 
-        return $requisitosPorListaDeServicios;
+        return  $requisitosPorListaDeServicios;
     }
 
     public function listaServiciosPorAlumno(Request $request)
