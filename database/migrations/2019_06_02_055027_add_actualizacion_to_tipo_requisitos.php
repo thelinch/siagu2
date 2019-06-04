@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddActualizacionToRequisitos extends Migration
+class AddActualizacionToTipoRequisitos extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class AddActualizacionToRequisitos extends Migration
      */
     public function up()
     {
-        Schema::table('requisitos', function (Blueprint $table) {
+        Schema::table('requisitotipos', function (Blueprint $table) {
             //
             $table->boolean("actualizacion")->default(false);
         });
@@ -26,7 +26,7 @@ class AddActualizacionToRequisitos extends Migration
      */
     public function down()
     {
-        Schema::table('requisitos', function (Blueprint $table) {
+        Schema::table('requisitotipos', function (Blueprint $table) {
             //
         });
     }

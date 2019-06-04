@@ -17,6 +17,10 @@ class ServicioSolicitadoRequisito extends Model
     }
     public function requisito()
     {
-        return $this->belongsTo(Requisito::Class, "requisito_id");
+        return $this->belongsTo(Requisito::class, "requisito_id");
+    }
+    public function servicioSolicitado()
+    {
+        return $this->belongsTo(ServicioSolicitado::class);
     }
 }

@@ -105,8 +105,11 @@ class RequisitoRepository implements RequisitoRepositoryInterface
     {
         $cuerpoPeticion = $request->json()->all();
         $modelEdit = Requisito::find($cuerpoPeticion["idRequisito"]);
-        $modelEdit->actualizacion = $cuerpoPeticion["checked"];
-        $modelEdit->save();
+
+        $modelEdit->tipos()->updateExistingPivot($cuerpoPeticion["tipo_id"], [
+            "actualizacion" => $cuerpoPeticion["checked"],
+            "numero_anios_actualizacion" => $cuerpoPeticion["checked"] ? $cuerpoPeticion["tiempo"] : 0
+        ]);
         return $modelEdit;
     }
     public function listarArchivosPorServicio(Request $request)

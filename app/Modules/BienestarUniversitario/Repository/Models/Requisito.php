@@ -17,12 +17,11 @@ class Requisito extends Model
     protected $casts = [
         "estado" => "boolean",
         "requerido" => "boolean",
-        "prioridad" => "boolean",
-        "actualizacion" => "boolean"
+        "prioridad" => "boolean"
     ];
     public function tipos()
     {
-        return $this->belongsToMany(Tipo::class, "requisitotipos", "requisito_id", "tipo_id")->wherePivot("estado", "=", 1);
+        return $this->belongsToMany(Tipo::class, "requisitotipos", "requisito_id", "tipo_id")->withPivot("actualizacion", "numero_anios_actualizacion")->wherePivot("estado", "=", 1)->using(pivotRequisitoTipo::class);
     }
     public function servicios()
     {

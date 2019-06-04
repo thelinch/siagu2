@@ -8,4 +8,5 @@ interface servicioSolicitadoRepositoryInterface extends crudRepository
 {
     public function listaServicioSolicitadoPorSemestreActual(Request $request);
     public function registroServicioSolicitadoPorAlumno(Request $request);
+    public function listarRequisitosRegistradosComedorYInternadoPorAlumnoYSemestreActual(int $idAlumno, string $codigoMatricula);
 }

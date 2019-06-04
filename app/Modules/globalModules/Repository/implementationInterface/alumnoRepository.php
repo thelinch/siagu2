@@ -67,9 +67,8 @@ class alumnoRepository implements alumnoRepositoryInterface
         $alumnoEdit->save();
         return $alumnoEdit;
     }
-
-    public function buscarAlumnoDatosPersona(int $idAlumno)
+    public function buscarAlumnoPorIdConTipoAlumno(int $idAlumno)
     {
-        return  $this->model->with("Persona.tipo_documento", "escuelaProfesional")->find($idAlumno);
+        return $this->model->with("tipoAlumno")->find($idAlumno);
     }
 }

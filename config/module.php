@@ -4,5 +4,6 @@ return [
         'globalModules',
         'BienestarUniversitario',
         'GradosyTitulos',
+        'Scalafond'
     ]
 ];

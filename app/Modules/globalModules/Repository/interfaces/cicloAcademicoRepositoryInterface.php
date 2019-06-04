@@ -8,4 +8,5 @@ use Illuminate\Http\Request;
 interface cicloAcademicoRepositoryInterface extends crudRepository
 {
     public function modificarCicloAcademicoPorServicio(Request $request);
+    public function cicloAcademicoActual();
 }

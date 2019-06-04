@@ -90,43 +90,15 @@ class servicioRepository implements ServicioRepositoryInterface
     {
         return $this->model->where("activador", "=", true)->where("estado", "=", true)->get();
     }
-    public function requisitosPorArrayServicio(Request $request)
+    public function listarRequisitosPorListaDeServicio(array $listaServicios)
     {
-        $cuerpoPeticion = $request->json()->all();
-        $listaServiciosSolicitados = $cuerpoPeticion["listaServiciosSolicitados"];
-        $requisitosRegistrados = DB::table('alumnos')
-            ->join("alumno_requisitos", "alumno_requisitos.alumno_id", "=", "alumnos.id")
-            ->where("alumnos.id", "=", $cuerpoPeticion["idAlumno"])
-            ->where("alumno_requisitos.codigoMatricula", "=", $cuerpoPeticion["codigoMatricula"])
-            ->select("alumno_requisitos.requisito_id as id")->distinct()->get();
+        $requisitosPorListaDeServicios = Servicio::with(["requisitos.archivos", "requisitos.tipos"])
+            ->whereIn("id", $listaServicios)->get()->map(function ($servicio) {
+                return  $servicio->requisitos;
+            })->flatten()->unique("id");
 
-        $requisitosRegistrados = collect($requisitosRegistrados)->map(function ($item, $key) {
-            return     $item->id;
-        });
-        /*$requisitos = DB::table('servicios')
-            ->join("serviciorequisitos", "serviciorequisitos.servicio_id", "=", "servicios.id")
-            ->join("requisitos", "requisitos.id", "=", "serviciorequisitos.requisito_id")
-            ->join("requisitotipos", "requisitotipos.requisito_id", "=", "requisitos.id")
-            ->join("requisito_archivos", "requisitos.id", "=", "requisito_archivos.requisito_id")
-            ->join("tipos", "tipos.id", "=", "requisitotipos.tipo_id")->select(
-                ["requisitos.id", "requisitos.nombre", "requisitos.nombreArchivo", "requisitos.prioridad", "requisitos.tipoArchivo", "requisitos.descripcion", "requisitos.actualizacion", "requisitos.requerido", "requisito_archivos.*"]
-            )->distinct()
-            ->whereIn("serviciorequisitos.servicio_id", $listaServiciosSolicitados)
-            ->whereNotIn("serviciorequisitos.requisito_id", $requisitosRegistrados)
-            ->where("serviciorequisitos.estado", "=", 1)
-            ->where("requisito_archivos.estado", "=", 1)
-            ->where("tipos.id", "=", 1)->orderBy("requisitos.requerido", "DESC")->get();*/
-        $requisitos =   Servicio::join("serviciorequisitos", "serviciorequisitos.servicio_id", "=", "servicios.id")
-            ->join("requisitos", "requisitos.id", "=", "serviciorequisitos.requisito_id")
-            ->join("requisitotipos", "requisitotipos.requisito_id", "=", "requisitos.id")
-            ->join("requisito_archivos", "requisitos.id", "=", "requisito_archivos.requisito_id")
-            ->join("tipos", "tipos.id", "=", "requisitotipos.tipo_id")
-            ->whereIn("servicios.id", $listaServiciosSolicitados)
-            ->where("serviciorequisitos.estado", "=", 1)
-            ->whereNotIn("serviciorequisitos.requisito_id", $requisitosRegistrados)
-            ->where("requisito_archivos.estado", "=", 1)
-            ->where("tipos.id", "=", 1)->get();
-        return $requisitos;
+
+        return $requisitosPorListaDeServicios;
     }
 
     public function listaServiciosPorAlumno(Request $request)
@@ -147,6 +119,8 @@ class servicioRepository implements ServicioRepositoryInterface
         $modelEdit->save();
         return $modelEdit;
     }
+    public function listarRequisitosActualizadosPorListaDeServicio(array $listaServiciosSolicitados)
+    { }
     public function reiniciarServicioYActualizarCicloAcademico(int $id, string $codigoMatriculaSeleccionado, int $idCicloAcademico)
     {
         $modelEdit = Servicio::find($id);

@@ -11,6 +11,6 @@ class Tipo extends Model
     protected $fillable = ['nombre', 'icono', 'estado'];
     public function requisitos()
     {
-        return $this->belongsToMany(Requisito::class, "requisitotipos","tipo_id","requisito_id")->withPivot("estado")->wherePivot("estado",1);
+        return $this->belongsToMany(Requisito::class, "requisitotipos", "tipo_id", "requisito_id")->withPivot("actualizacion")->wherePivot("estado", 1);
     }
 }
