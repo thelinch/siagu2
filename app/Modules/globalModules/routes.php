@@ -33,4 +33,6 @@ Route::group(['prefix' => 'global', 'namespace' => 'App\Modules\globalModules\co
 
     Route::post("/fileUpload/Requisito", ["as" => "bienestar.global.fileUpload.Requisito", "uses" => "fileController@fileUploadRequisito"]);
     Route::post("/fileUpload/elimarArchivoRequisito", ["as" => "bienestar.global.fileUpload.elimarArchivoRequisito", "uses" => "fileController@elimarArchivoRequisito"]);
+
+    Route::post("/alumnoFiltrado", ["as" => "global.tipo.all", "uses" => "alumnoController@alumnosFiltrado"]);
 });

@@ -15,7 +15,9 @@ class alumnoGraduadoTituladoRepository implements alumnoGraduadoTituladoReposito
         $this->model = $alumnoGraduadoTitulado;
     }
     public function all()
-    { }
+    { 
+      return   $this->model::with(["Empresa","trabajoInvestigacion","DenominacionGradoTitulo.gradoTitulo","NombreProgramaEstudio","ModalidadEstudio","ObtencionGradoTitulo"])->where("estado", true)->get();
+    }
     public function find($id)
     {
         return $this->model->with(["Empresa", "trabajoInvestigacion", "DenominacionGradoTitulo.gradoTitulo", "NombreProgramaEstudio", "ModalidadEstudio", "ObtencionGradoTitulo"])->find($id);

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 interface alumnoServiceInterface extends crudService
 {
     public function listaAlumnosPregrado();
+    public function listaAlumnosFiltrado(Request $request);
     public function buscarAlumnoConRequisitosYServiciosPorId(Request $request);
     public function listaServiciosPorAlumno(Request $request);
     public function listarRequisitosPorAlumnoYSemestreActual(Request $request);

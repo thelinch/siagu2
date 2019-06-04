@@ -29,4 +29,8 @@ class AlumnoController extends Controller
     {
         return $this->service->listarRequisitosPorAlumnoYSemestreActual($request);
     }
+    public function alumnosFiltrado(Request $request)
+    {
+        return response()->json($this->service->listaAlumnosFiltrado($request));
+    }
 }

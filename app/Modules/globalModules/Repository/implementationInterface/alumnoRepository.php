@@ -31,6 +31,17 @@ class alumnoRepository implements alumnoRepositoryInterface
     {
         return $this->model->with("persona")->where("grado_alumno", true)->get();
     }
+
+    public function listaAlumnosFiltrado(Request $request)
+    {
+        $cuerpoPeticion = $request->json()->all();
+        return  Alumno::join("personas", "personas.id", "=", "alumnos.persona_id")
+            ->join("tipos_documentos", "tipos_documentos.id", "=", "personas.tipo_documento_id")
+            ->select("alumnos.*", "personas.*", "tipos_documentos.*")
+            ->where("alumnos.grado_alumno", "=", true)
+            ->where("personas.nombre", "like", "%" . $cuerpoPeticion["nombre"] . "%")->with(["persona.tipo_documento", "escuelaProfesional.facultad_oficina"])->get();
+    }
+
     public function buscarAlumnoConRequisitosYServiciosPorId(Request $request)
     {
         $contenido = $request->json()->all();
@@ -55,5 +66,10 @@ class alumnoRepository implements alumnoRepositoryInterface
         $alumnoEdit->grado_alumno = false;
         $alumnoEdit->save();
         return $alumnoEdit;
+    }
+
+    public function buscarAlumnoDatosPersona(int $idAlumno)
+    {
+        return  $this->model->with("Persona.tipo_documento", "escuelaProfesional")->find($idAlumno);
     }
 }

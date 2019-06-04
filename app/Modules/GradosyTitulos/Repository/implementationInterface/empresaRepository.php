@@ -25,7 +25,7 @@ class empresaRepository implements empresaRepositoryInterface
     public function listaEmpresaYAlumnoBachiller(Request $request)
     {
         $cuerpoPeticion = $request->json()->all();
-        return $this->model->where("estado", "=", 1)->where("tipo_empresa_id","=",$cuerpoPeticion["empresa_id"])->get();
+        return $this->model->where("estado", "=", 1)->where("nombre", "=", "Universidad Nacional Agraria de la Selva")->where("tipo_empresa_id","=",$cuerpoPeticion["empresa_id"])->get();
 
     }
 }

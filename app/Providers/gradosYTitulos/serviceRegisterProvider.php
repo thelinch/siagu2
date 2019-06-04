@@ -43,7 +43,8 @@ class serviceRegisterProvider extends ServiceProvider
         });
         $this->app->bind("alumnoGraduadoTituladoService", function ($app) {
             return new alumnoGraduadoTituladoService(
-                $app->make(alumnoGraduadoTituladoServiceInterface::class)
+                $app->make(alumnoGraduadoTituladoServiceInterface::class),
+                $app->make(alumnoRepository::class)
             );
         });
         $this->app->bind("registroAlumnoGraduadoTituladoService", function ($app) {

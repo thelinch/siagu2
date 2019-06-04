@@ -4,11 +4,12 @@ namespace App\Providers\globalModule;
 use Illuminate\Support\ServiceProvider;
 use App\Modules\globalModules\service\bussiness\alumnoService;
 use App\Modules\globalModules\service\interfaces\alumnoServiceInterface;
-use App\Modules\globalModules\service\bussiness\fileService;
+use App\Modules\globalModules\service\bussiness\fileService; 
 use App\Modules\globalModules\service\bussiness\cicloAcademicoService;
 use App\Modules\globalModules\service\interfaces\cicloAcademicoServiceInterface;
 use App\Modules\BienestarUniversitario\Repository\implementationInterface\servicioRepository;
 use App\Modules\BienestarUniversitario\Repository\implementationInterface\requisitoArchivoRepository;
+use App\Modules\globalModules\Repository\implementationInterface\alumnoRepository;
 
 class serviceRegisterProvider extends ServiceProvider
 {

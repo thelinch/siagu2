@@ -6,14 +6,15 @@ use Illuminate\Http\Request;
 use App\Modules\BienestarUniversitario\Repository\Models\ServicioSolicitado;
 use App\Modules\BienestarUniversitario\Repository\Models\AlumnoRequisito;
 use App\Modules\globalModules\Repository\Models\Alumno;
+use App\Modules\globalModules\Repository\interfaces\alumnoRepositoryInterface;
 
 class alumnoService implements alumnoServiceInterface
 {
     private $repository;
-    /* public function __construct(alumnoRepositoryInterface $alumnoRepository)
+    public function __construct(alumnoRepositoryInterface  $alumnoRepository)
     {
         $this->repository = $alumnoRepository;
-    }*/
+    }
     public function all()
     {
 
@@ -38,12 +39,20 @@ class alumnoService implements alumnoServiceInterface
     public function listaAlumnosPregrado()
     {
         return Alumno::with(["persona.tipo_documento", "escuelaProfesional.facultad_oficina"])->where("grado_alumno", true)->get();
+
         /* return DB::table("alumnos")
             ->join("personas", "personas.id", "=", "alumnos.persona_id")
             ->join("tipos_documentos", "tipos_documentos.id", "=", "personas.tipo_documento_id")
             ->select("alumnos.*","personas.*","tipos_documentos.*")
             ->where("alumnos.grado_alumno", "=", true)->get();*/
     }
+
+    public function listaAlumnosFiltrado(Request $request)
+    {
+        //return Alumno::with(["persona.tipo_documento", "escuelaProfesional.facultad_oficina"])->where("grado_alumno", true)->get();
+       return $this->repository->listaAlumnosFiltrado($request);
+    }
+
     public function buscarAlumnoConRequisitosYServiciosPorId(Request $request)
     {
         $cuerpoPeticio = $request->json()->all();

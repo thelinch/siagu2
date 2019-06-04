@@ -21,4 +21,6 @@ Route::group(['prefix' => 'gradostitulos', 'namespace' => 'App\Modules\GradosyTi
     Route::post('/alumnoGraduado/create', ['as' => 'gradostitulos.create', 'uses' => 'alumnoGraduadoTituladoController@create']);
     Route::post('/registroalumnograduado/create', ['as' => 'gradostitulos.create', 'uses' => 'registroAlumnoGraduadoTituladoController@create']);
     Route::post('/alumnoGraduado/{id}/editar', ['as' => 'gradostitulos.edit', 'uses' => 'alumnoGraduadoTituladoController@edit']);
+
+    Route::get('/alumnosGraduadosBachilleres', ['as' => 'gradostitulos.index', 'uses' => 'alumnoGraduadoTituladoController@alumnoGraduadoTitulado']);
 });
