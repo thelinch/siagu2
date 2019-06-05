@@ -11,6 +11,9 @@ class ServicioSolicitadoRequisito extends Model
     //
     protected $table = "servicio_solicitado_requisitos";
     protected $fillable = ["codigoMatricula", "fechaRegistro"];
+    protected $dates = [
+        "fechaRegistro"
+    ];
     public function archivos()
     {
         return $this->hasMany(ArchivoAlumnoRequisito::class);
