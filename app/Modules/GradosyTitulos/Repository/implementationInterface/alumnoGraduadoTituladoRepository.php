@@ -15,8 +15,8 @@ class alumnoGraduadoTituladoRepository implements alumnoGraduadoTituladoReposito
         $this->model = $alumnoGraduadoTitulado;
     }
     public function all()
-    { 
-      return   $this->model::with(["Empresa","trabajoInvestigacion","DenominacionGradoTitulo.gradoTitulo","NombreProgramaEstudio","ModalidadEstudio","ObtencionGradoTitulo"])->where("estado", true)->get();
+    {
+        return   $this->model::with(["Empresa", "trabajoInvestigacion", "DenominacionGradoTitulo.gradoTitulo", "NombreProgramaEstudio", "ModalidadEstudio", "ObtencionGradoTitulo"])->where("estado", true)->get();
     }
     public function find($id)
     {
@@ -52,7 +52,8 @@ class alumnoGraduadoTituladoRepository implements alumnoGraduadoTituladoReposito
             "segunda_especialidad_id" => 1,
             "obtencion_grado_titulo_id" => $cuerpoPeticion["obtencion_grado"]["id"],
             "grado_extranjero_id" => 1,
-            "registro_programa_id" => 1
+            "registro_programa_id" => 1,
+            "grado_titulo_id" => 1
         ]);
         return $this->model->where("id", "=", $alumnoGraduadoTituladoCreado->id)->with("trabajoInvestigacion")->first();
     }
@@ -75,4 +76,5 @@ class alumnoGraduadoTituladoRepository implements alumnoGraduadoTituladoReposito
         $alumnoGraduadoTitulado->save();
         return $this->model->where("id", "=", $alumnoGraduadoTitulado->id)->with("trabajoInvestigacion")->first();
     }
+
 }

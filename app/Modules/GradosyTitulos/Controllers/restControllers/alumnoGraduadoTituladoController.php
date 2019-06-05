@@ -28,4 +28,5 @@ class alumnoGraduadoTituladoController extends Controller
     {
         return response()->json($this->service->listaAlumnosBachilleres(), 200);
     }
+
 }

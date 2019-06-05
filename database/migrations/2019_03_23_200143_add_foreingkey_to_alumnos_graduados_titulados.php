@@ -46,6 +46,8 @@ class AddForeingkeyToAlumnosGraduadosTitulados extends Migration
 
             $table->integer('registro_programa_id')->unsigned();
             $table->foreign('registro_programa_id')->references('id')->on('registros_programas');
+
+            
         });
     }
 
