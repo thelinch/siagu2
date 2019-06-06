@@ -13,7 +13,7 @@ class alumnoGraduadoTitulado extends Model
         "fecha_ingreso" => "date:Y-m-d",
         "fecha_egreso" => "date:Y-m-d",
         "estado" => "boolean",
-        "creditos_aprobados" => "boolean"
+        "estadograduado" => "boolean"
     ];
     public function trabajoInvestigacion()
     {

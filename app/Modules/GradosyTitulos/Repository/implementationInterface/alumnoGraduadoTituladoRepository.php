@@ -33,29 +33,55 @@ class alumnoGraduadoTituladoRepository implements alumnoGraduadoTituladoReposito
             "url" => $cuerpoPeticion["trabajo_investigacion"]["url"]
         ]);
 
-
-        $alumnoGraduadoTituladoCreado = $this->model::create([
-            "alumno_general_id" => $cuerpoPeticion["alumno_general_id"],
-            "procedencia_bachiller" => $cuerpoPeticion["empresa_id"]["nombre"],
-            "procednecia_titulo_pedagogico" => "NINGUNO",
-            "fecha_ingreso" => Carbon::parse($cuerpoPeticion["fecha_ingreso"])->format("Y-m-d"),
-            "fecha_egreso" =>  Carbon::parse($cuerpoPeticion["fecha_egreso"])->format("Y-m-d"),
-            "creditos_aprobados" => $cuerpoPeticion["creditos_aprobados"],
-            "foto" => $cuerpoPeticion["foto"],
-            "tipo_alumno_id" => 1,
-            "empresa_id" => $cuerpoPeticion["empresa_id"]["id"],
-            "trabajo_investigacion_id" => $trabajoInvestigacionCreado->id,
-            "denominacion_grado_titulo_id" => $cuerpoPeticion["denominacion_grado_titulo"]["id"],
-            "nombre_programa_estudio_id" => $cuerpoPeticion["nombre_programa_estudio"]["id"],
-            "modalidad_estudio_id" => $cuerpoPeticion["modalidad_de_estudio"]["id"],
-            "revalidacion_grado_id" => 1,
-            "segunda_especialidad_id" => 1,
-            "obtencion_grado_titulo_id" => $cuerpoPeticion["obtencion_grado"]["id"],
-            "grado_extranjero_id" => 1,
-            "registro_programa_id" => 1,
-            "grado_titulo_id" => 1
-        ]);
-        return $this->model->where("id", "=", $alumnoGraduadoTituladoCreado->id)->with("trabajoInvestigacion")->first();
+        if ($cuerpoPeticion["grado_titulo_id"] == 1) {
+            $alumnoGraduadoTituladoCreado = $this->model::create([
+                "alumno_general_id" => $cuerpoPeticion["alumno_general_id"],
+                "procedencia_bachiller" => "NINGUNO",
+                "procednecia_titulo_pedagogico" => "NINGUNO",
+                "fecha_ingreso" => Carbon::parse($cuerpoPeticion["fecha_ingreso"])->format("Y-m-d"),
+                "fecha_egreso" =>  Carbon::parse($cuerpoPeticion["fecha_egreso"])->format("Y-m-d"),
+                "creditos_aprobados" => $cuerpoPeticion["creditos_aprobados"],
+                "foto" => $cuerpoPeticion["foto"],
+                "estadograduado" => 1,
+                "tipo_alumno_id" => 1,
+                "empresa_id" => $cuerpoPeticion["empresa_id"]["id"],
+                "trabajo_investigacion_id" => $trabajoInvestigacionCreado->id,
+                "denominacion_grado_titulo_id" => $cuerpoPeticion["denominacion_grado_titulo"]["id"],
+                "nombre_programa_estudio_id" => $cuerpoPeticion["nombre_programa_estudio"]["id"],
+                "modalidad_estudio_id" => $cuerpoPeticion["modalidad_de_estudio"]["id"],
+                "revalidacion_grado_id" => 1,
+                "segunda_especialidad_id" => 1,
+                "obtencion_grado_titulo_id" => $cuerpoPeticion["obtencion_grado"]["id"],
+                "grado_extranjero_id" => 1,
+                "registro_programa_id" => 1,
+                "grado_titulo_id" => 1
+            ]);
+            return $this->model->where("id", "=", $alumnoGraduadoTituladoCreado->id)->with("trabajoInvestigacion")->first();
+        } else {
+            $alumnoGraduadoTituladoCreado = $this->model::create([
+                "alumno_general_id" => $cuerpoPeticion["alumno_general_id"],
+                "procedencia_bachiller" => $cuerpoPeticion["empresa_id"]["nombre"],
+                "procednecia_titulo_pedagogico" => "NINGUNO",
+                "fecha_ingreso" => Carbon::parse($cuerpoPeticion["fecha_ingreso"])->format("Y-m-d"),
+                "fecha_egreso" =>  Carbon::parse($cuerpoPeticion["fecha_egreso"])->format("Y-m-d"),
+                "creditos_aprobados" => $cuerpoPeticion["creditos_aprobados"],
+                "foto" => $cuerpoPeticion["foto"],
+                "estadograduado" => 1,
+                "tipo_alumno_id" => 1,
+                "empresa_id" => $cuerpoPeticion["empresa_id"]["id"],
+                "trabajo_investigacion_id" => $trabajoInvestigacionCreado->id,
+                "denominacion_grado_titulo_id" => $cuerpoPeticion["denominacion_grado_titulo"]["id"],
+                "nombre_programa_estudio_id" => $cuerpoPeticion["nombre_programa_estudio"]["id"],
+                "modalidad_estudio_id" => $cuerpoPeticion["modalidad_de_estudio"]["id"],
+                "revalidacion_grado_id" => 1,
+                "segunda_especialidad_id" => 1,
+                "obtencion_grado_titulo_id" => $cuerpoPeticion["obtencion_grado"]["id"],
+                "grado_extranjero_id" => 1,
+                "registro_programa_id" => 1,
+                "grado_titulo_id" => 2
+            ]);
+            return $this->model->where("id", "=", $alumnoGraduadoTituladoCreado->id)->with("trabajoInvestigacion")->first();
+        }
     }
 
     public function edit($id, array $data)
@@ -76,5 +102,4 @@ class alumnoGraduadoTituladoRepository implements alumnoGraduadoTituladoReposito
         $alumnoGraduadoTitulado->save();
         return $this->model->where("id", "=", $alumnoGraduadoTitulado->id)->with("trabajoInvestigacion")->first();
     }
-
 }

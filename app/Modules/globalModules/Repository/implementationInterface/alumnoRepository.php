@@ -47,14 +47,14 @@ class alumnoRepository implements alumnoRepositoryInterface
             ->where("escuela_profesionales.nombre", "like", "%" . $cuerpoPeticion["especialidad"]["nombre"] . "%")->with(["persona.tipo_documento", "escuelaProfesional.facultad_oficina"])->get();*/
 
         return  $this->model->whereHas("persona", function ($consulta) use ($cuerpoPeticion) {
-                $consulta->where("nombre", "like", "%" . $cuerpoPeticion["nombre"] . "%")
+            $consulta->where("nombre", "like", "%" . $cuerpoPeticion["nombre"] . "%")
                 ->where("apellido_materno", "like", "%" . $cuerpoPeticion["apellidomaterno"] . "%")
                 ->where("apellido_paterno", "like", "%" . $cuerpoPeticion["apellidopaterno"] . "%")
                 ->where("numero_documento", "like", "%" . $cuerpoPeticion["numero_documento"] . "%");
-                 })->whereHas("escuelaProfesional", function ($consulta) use ($cuerpoPeticion) {
-                $consulta->where("nombre", "like", "%" . $cuerpoPeticion["especialidad"]["nombre"] . "%");
-                })->with("persona.documento", "escuelaProfesional.facultad_oficina")
-                ->where("grado_alumno", "=", true)->get();
+        })->whereHas("escuelaProfesional", function ($consulta) use ($cuerpoPeticion) {
+            $consulta->where("nombre", "like", "%" . $cuerpoPeticion["especialidad"]["nombre"] . "%");
+        })->with("persona.documento", "escuelaProfesional.facultad_oficina")
+            ->where("grado_alumno", "=", true)->get();
     }
 
     public function buscarAlumnoConRequisitosYServiciosPorId(Request $request)
@@ -85,5 +85,10 @@ class alumnoRepository implements alumnoRepositoryInterface
     public function tipoAlumnoPorIdAlumno(int $idAlumno)
     {
         return $this->model->find($idAlumno)->tipoAlumno()->first();
+    }
+
+    public function buscarAlumnoDatosPersona(int $idAlumno)
+    {
+        return  $this->model->with("Persona.tipo_documento", "escuelaProfesional")->find($idAlumno);
     }
 }
