@@ -9,13 +9,14 @@ use App\Modules\globalModules\Repository\Models\cicloAcademico;
 class Servicio extends Model
 {
     //
-    protected $fillable = ['nombre', 'total', 'codigoMatricula', 'vacantesHombre', 'vacantesMujer', "icono", "fechaInicio", "fechaFin", "activador"];
+    protected $fillable = ['nombre', 'total', 'divisio_personas', 'codigoMatricula', 'vacantesHombre', 'vacantesMujer', "icono", "fechaInicio", "fechaFin", "activador"];
     protected $date = ["fechaFin", "fechaInicio"];
     protected $casts = [
         "fechaInicio" => "date:Y-m-d",
         "fechaFin" => "date:Y-m-d",
         "activador" => "boolean",
-        "estado" => "boolean"
+        "estado" => "boolean",
+        "divisio_personas" => "boolean"
     ];
     public function requisitos()
     {
@@ -31,7 +32,7 @@ class Servicio extends Model
     }
     public function cicloAcademicoActual()
     {
-        return $this->hasOne(cicloAcademicoServicios::class)->where("vigencia","=",true);
+        return $this->hasOne(cicloAcademicoServicios::class)->where("vigencia", "=", true);
     }
     public function ciclosAcademicos()
     {

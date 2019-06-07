@@ -26,8 +26,8 @@ class ampliacionRepository implements ampliacionRepositoryInterface
     {
         $cuerpoPeticion = $data->json()->all();
         $this->model->create([
-            "varon" => $cuerpoPeticion["varon"] == null ? 0 : $cuerpoPeticion["varon"],
-            "mujer" => $cuerpoPeticion["mujer"] == null ? 0 : $cuerpoPeticion["mujer"],
+            "varon" => array_key_exists("varon", $cuerpoPeticion) ?  $cuerpoPeticion["varon"] : 0,
+            "mujer" => array_key_exists("mujer", $cuerpoPeticion) ? $cuerpoPeticion["mujer"] : 0,
             "total" => $cuerpoPeticion["total"],
             "servicio_id" => $cuerpoPeticion["servicio_id"],
             "fechaRegistro" => Carbon::now(),

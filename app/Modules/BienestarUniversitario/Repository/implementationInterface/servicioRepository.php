@@ -45,7 +45,8 @@ class servicioRepository implements ServicioRepositoryInterface
             [
                 "nombre" => $modelObjeto["nombre"],
                 "icono" => $modelObjeto["icono"] != null ? $modelObjeto["icono"] : "fa-eye-slash",
-                "codigoMatricula" => $modelObjeto["matricula"]["nombre"]
+                "codigoMatricula" => $modelObjeto["matricula"]["nombre"],
+                "divisio_personas" => $modelObjeto["divisio_personas"]
             ]
         );
         $this->cicloAcademicoModel->create([
@@ -61,6 +62,7 @@ class servicioRepository implements ServicioRepositoryInterface
         $modelServicio = $this->find($id);
         $modelServicio->nombre = $data["nombre"];
         $modelServicio->icono = $data["icono"] != null ? $data["icono"] : "fa-eye-slash";
+        $modelServicio->divisio_personas = $data["divisio_personas"];
         $modelServicio->save();
         return $modelServicio;
     }
@@ -115,8 +117,8 @@ class servicioRepository implements ServicioRepositoryInterface
         $cuerpoPeticion = $request->json()->all();
         $modelEdit = $this->model->find($cuerpoPeticion["servicio_id"]);
         $modelEdit->total = $modelEdit->total + $cuerpoPeticion["total"];
-        $modelEdit->vacantesHombre = $modelEdit->vacantesHombre + $cuerpoPeticion["varon"];
-        $modelEdit->vacantesMujer = $modelEdit->vacantesMujer + $cuerpoPeticion["mujer"];
+        $modelEdit->vacantesHombre = $modelEdit->vacantesHombre + array_key_exists("varon", $cuerpoPeticion) ? $cuerpoPeticion["varon"] : 0;
+        $modelEdit->vacantesMujer = $modelEdit->vacantesMujer + array_key_exists("mujer", $cuerpoPeticion) ? $cuerpoPeticion["mujer"] : 0;
         $modelEdit->save();
         return $modelEdit;
     }
