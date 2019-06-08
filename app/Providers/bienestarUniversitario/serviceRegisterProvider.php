@@ -66,7 +66,8 @@ class serviceRegisterProvider extends ServiceProvider
         });
         $this->app->bind("servicioSolicitadoService", function ($app) {
             return  new servicioSolicitadoService(
-                $app->make(servicioSolicitadoServiceInterface::class)
+                $app->make(servicioSolicitadoServiceInterface::class),
+                $app->make(cicloAcademicoRepository::class)
             );
         });
         $this->app->bind("ampliacionService", function ($app) {

@@ -66,13 +66,14 @@ class servicioService implements servicioServiceInterface
     }
     public function listarRequisitosDeComedorYInternadoYTipoAlumno(Request $request)
     {
-        $tipoAlumno = $this->alumnoRepository->tipoAlumnoPorIdAlumno(1);
-        $listaRequisitosPorListaServicios = $this->repositoy->listarRequisitosPorListaDeServicio(array(1, 2));
+        $cuerpoPeticio = $request->json()->all();
+        $tipoAlumno = $this->alumnoRepository->tipoAlumnoPorIdAlumno($cuerpoPeticio["idAlumno"]);
+        $listaRequisitosPorListaServicios = $this->repositoy->listarRequisitosPorListaDeServicio($cuerpoPeticio["listaServiciosSolicitados"]);
         $listaRequisitoPorTipoAlumno = $this->filtradoRequisitoPorElTipoAlumno($tipoAlumno->nombre, $listaRequisitosPorListaServicios);
         $requisitos = collect();
         $entro = "ddw";
         $cicloAcademicoActual = $this->cicloAcademicoRepository->cicloAcademicoActual();
-        $requisitosRegistradosPorCicloActual = $this->servicioSolicitadoRepository->listarRequisitosRegistradosComedorYInternadoPorAlumnoYSemestreActual(1, $cicloAcademicoActual->nombre);
+        $requisitosRegistradosPorCicloActual = $this->servicioSolicitadoRepository->listarRequisitosRegistradosComedorYInternadoPorAlumnoYSemestreActual($cuerpoPeticio["idAlumno"], $cicloAcademicoActual->nombre);
         if ($tipoAlumno->nombre == "ANTIGUO") {
             $fechaActual = Carbon::now();
             $listaRequisitoParaAntiguo = collect();
@@ -98,9 +99,11 @@ class servicioService implements servicioServiceInterface
             }
             return $listaRequisitoParaAntiguo;
         } else {
-            $requisitosRegistradosPorCicloActual = $requisitosRegistradosPorCicloActual->map(function ($servicioSolicitadoRequisito) {
-                return $servicioSolicitadoRequisito->requisito_id;
-            });
+            if (count($requisitosRegistradosPorCicloActual) != 0) {
+                $requisitosRegistradosPorCicloActual = $requisitosRegistradosPorCicloActual->map(function ($servicioSolicitadoRequisito) {
+                    return $servicioSolicitadoRequisito->requisito_id;
+                });
+            }
             $requisitos = $listaRequisitoPorTipoAlumno->whereNotIn("id", $requisitosRegistradosPorCicloActual)->toArray();
         }
         return  array_merge($requisitos);

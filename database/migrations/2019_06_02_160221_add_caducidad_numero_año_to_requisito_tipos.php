@@ -15,7 +15,7 @@ class AddCaducidadNumeroAñoToRequisitoTipos extends Migration
     {
         Schema::table('requisitotipos', function (Blueprint $table) {
             //
-            $table->float("numero_anios_actualizacion");
+            $table->float("numero_anios_actualizacion")->default(0);
         });
     }
 

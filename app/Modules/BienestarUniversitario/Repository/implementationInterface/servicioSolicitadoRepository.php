@@ -26,10 +26,10 @@ class servicioSolicitadoRepository implements servicioSolicitadoRepositoryInterf
     { }
     public function edit($id, array $data)
     { }
-    public function listaServicioSolicitadoPorSemestreActual(Request $request)
+    public function listaServicioSolicitadoPorSemestreActual(string $semestreActual)
     {
-        $cuerpoPeticion = $request->json()->all();
-        return $this->model->where("codigoMatricula", "=", $cuerpoPeticion["codigoMatricula"])
+
+        return $this->model->where("codigoMatricula", "=", $semestreActual)
             ->with(["alumno.escuelaProfesional", "alumno.persona", "alumno.tipoAlumno", "servicios", "estadoServicio"])->get();
     }
     public function registroServicioSolicitadoPorAlumno(Request $request)
@@ -65,5 +65,12 @@ class servicioSolicitadoRepository implements servicioSolicitadoRepositoryInterf
             return $this->model->find($servicioSolicitadoMasActualConRequisitos->id)->serviciSolicitadoRequisitos()->get();
         }
         return null;
+    }
+    public function servicioSolicitadoPorAlumnoComedorYInternadoYSemestreActual(int $idAlumno, string $codigoMatricula)
+    {
+        $servicioSolicitado = $this->model->whereHas("servicios", function ($q) {
+            $q->whereIn("nombre", ["COMEDOR", "INTERNADO"]);
+        })->with(["servicios", "requisitos", "estadoServicio"])->where([["alumno_id", "=", $idAlumno], ["codigoMatricula", "=", $codigoMatricula]])->get();
+        return count($servicioSolicitado) > 0 ? $servicioSolicitado->first() : null;
     }
 }

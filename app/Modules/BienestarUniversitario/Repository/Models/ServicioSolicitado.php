@@ -4,6 +4,7 @@ namespace App\Modules\BienestarUniversitario\Repository\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Modules\globalModules\Models\Alumno;
+use App\Modules\bienestarUniversitario\Repository\Models\Requisito;
 
 class ServicioSolicitado extends Model
 {
@@ -32,5 +33,9 @@ class ServicioSolicitado extends Model
     public function serviciSolicitadoRequisitos()
     {
         return $this->hasMany(ServicioSolicitadoRequisito::class);
+    }
+    public function requisitos()
+    {
+        return $this->belongsToMany(Requisito::class, "servicio_solicitado_requisitos", "servicio_solicitado_id", "requisito_id");
     }
 }

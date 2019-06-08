@@ -6,8 +6,9 @@ use Illuminate\Http\Request;
 
 interface servicioSolicitadoRepositoryInterface extends crudRepository
 {
-    public function listaServicioSolicitadoPorSemestreActual(Request $request);
+    public function listaServicioSolicitadoPorSemestreActual(string $semestreActual);
     public function registroServicioSolicitadoPorAlumno(Request $request);
     public function listarRequisitosRegistradosComedorYInternadoPorAlumnoYSemestreActual(int $idAlumno, string $codigoMatricula);
     public function listaRequisitosRegistradoDelServicioSolicitadoMasActualPorAlumno(int $idAlumno);
+    public function servicioSolicitadoPorAlumnoComedorYInternadoYSemestreActual(int $idAlumno, string $codigoMatricula);
 }

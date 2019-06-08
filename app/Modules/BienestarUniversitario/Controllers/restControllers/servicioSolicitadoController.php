@@ -23,4 +23,8 @@ class servicioSolicitadoController extends Controller
     {
         return response()->json($this->service->registroServicioSolicitadoPorAlumno(($request)));
     }
+    public function servicioSolicitadoPorAlumnoComedorYInternadoYSemestreActual(Request $request)
+    {
+        return $this->service->servicioSolicitadoPorAlumnoComedorYInternadoYSemestreActual($request);
+    }
 }

@@ -9,4 +9,5 @@ interface servicioSolicitadoServiceInterface extends crudService
 
     public function  listaServicioSolicitadoPorSemestreActual(Request $request);
     public function registroServicioSolicitadoPorAlumno(Request $request);
+    public function servicioSolicitadoPorAlumnoComedorYInternadoYSemestreActual(Request $request);
 }
