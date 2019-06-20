@@ -11,6 +11,8 @@ use App\Modules\BienestarUniversitario\Repository\implementationInterface\servic
 use App\Modules\BienestarUniversitario\Repository\implementationInterface\servicioSolicitadoRepository;
 use App\Modules\BienestarUniversitario\Repository\implementationInterface\ampliacionRepository;
 use App\Modules\BienestarUniversitario\Repository\implementationInterface\requisitoArchivoRepository;
+use App\Modules\BienestarUniversitario\Repository\implementationInterface\servicioSolicitadoRequisitoRepository;
+
 
 
 
@@ -18,6 +20,7 @@ use App\Modules\BienestarUniversitario\Repository\interfaces\alumnoRequisitoRepo
 use App\Modules\BienestarUniversitario\Repository\interfaces\servicioSolicitadoRepositoryInterface;
 use App\Modules\BienestarUniversitario\Repository\interfaces\ampliacionRepositoryInterface;
 use App\Modules\BienestarUniversitario\Repository\interfaces\requisitoArchivoRepositoryInterface;
+use App\Modules\BienestarUniversitario\Repository\interfaces\servicioSolicitadoRequisitoInterface;
 
 class RepositoryServiceProvider extends ServiceProvider
 {
@@ -55,6 +58,10 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(
             requisitoArchivoRepositoryInterface::class,
             requisitoArchivoRepository::class
+        );
+        $this->app->bind(
+            servicioSolicitadoRequisitoInterface::class,
+            servicioSolicitadoRequisitoRepository::class
         );
         /**/
         /*$this->app->bind(

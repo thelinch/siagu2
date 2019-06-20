@@ -34,6 +34,10 @@ class ServicioSolicitado extends Model
     {
         return $this->hasMany(ServicioSolicitadoRequisito::class);
     }
+    public function servicioSolicitadoRequisitos()
+    {
+        return $this->hasMany(ServicioSolicitadoRequisito::class);
+    }
     public function requisitos()
     {
         return $this->belongsToMany(Requisito::class, "servicio_solicitado_requisitos", "servicio_solicitado_id", "requisito_id");

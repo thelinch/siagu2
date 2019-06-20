@@ -32,7 +32,8 @@ class servicioSolicitadoService implements servicioSolicitadoServiceInterface
     }
     public function registroServicioSolicitadoPorAlumno(Request $request)
     {
-        return $this->repository->registroServicioSolicitadoPorAlumno($request);
+        $cicloActual = $this->cicloRepository->cicloAcademicoActual();
+        return $this->repository->registroServicioSolicitadoPorAlumno($request, $cicloActual->nombre);
     }
     public function servicioSolicitadoPorAlumnoComedorYInternadoYSemestreActual(Request $request)
     {

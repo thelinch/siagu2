@@ -28,6 +28,11 @@ class FileController extends Controller
 
         return $this->service->fileUpload(($request));
     }
+    public function subirFotoServicioSolicitadoRequisitos(Request $request)
+    {
+        return $this->service->subirFotoServicioSolicitadoRequisitos($request);
+    }
+
     /** $request archivo que servira como modelo para los requisitos 
      * @Return Url:string 
      */

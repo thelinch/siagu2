@@ -32,14 +32,14 @@ class servicioSolicitadoRepository implements servicioSolicitadoRepositoryInterf
         return $this->model->where("codigoMatricula", "=", $semestreActual)
             ->with(["alumno.escuelaProfesional", "alumno.persona", "alumno.tipoAlumno", "servicios", "estadoServicio"])->get();
     }
-    public function registroServicioSolicitadoPorAlumno(Request $request)
+    public function registroServicioSolicitadoPorAlumno(Request $request, string $codigoMatricula)
     {
         $cuerpoPeticion = $request->json()->all();
         $servicioSolicitado = $this->model->create([
             "alumno_id" => $cuerpoPeticion["idAlumno"],
             "estado_servicio_id" => 1,
             "fechaRegistro" => Carbon::now(),
-            "codigoMatricula" => $cuerpoPeticion["codigoMatricula"],
+            "codigoMatricula" => $codigoMatricula,
         ]);
         foreach ($cuerpoPeticion["listaDeServicioSolicitados"] as $servicio) {
             $servicioSolicitado->servicios()->attach($servicio);
@@ -72,5 +72,14 @@ class servicioSolicitadoRepository implements servicioSolicitadoRepositoryInterf
             $q->whereIn("nombre", ["COMEDOR", "INTERNADO"]);
         })->with(["servicios", "requisitos", "estadoServicio"])->where([["alumno_id", "=", $idAlumno], ["codigoMatricula", "=", $codigoMatricula]])->get();
         return count($servicioSolicitado) > 0 ? $servicioSolicitado->first() : null;
+    }
+    public function crearServicioSolicitadoRequisitoPorServicioSolicitado(int $idServicioSolicitado, string $codigoMatricula, int $idRequisito)
+    {
+        $servicioSolicitadoRequisitoCreado = $this->model->find($idServicioSolicitado)->servicioSolicitadoRequisitos()->create([
+            "codigoMatricula" => $codigoMatricula,
+            "requisito_id" => $idRequisito,
+            "fechaRegistro" => Carbon::now()
+        ]);
+        return $servicioSolicitadoRequisitoCreado;
     }
 }

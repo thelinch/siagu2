@@ -10,7 +10,7 @@ class ServicioSolicitadoRequisito extends Model
 {
     //
     protected $table = "servicio_solicitado_requisitos";
-    protected $fillable = ["codigoMatricula", "fechaRegistro"];
+    protected $fillable = ["codigoMatricula", "fechaRegistro", "requisito_id"];
     protected $dates = [
         "fechaRegistro"
     ];
