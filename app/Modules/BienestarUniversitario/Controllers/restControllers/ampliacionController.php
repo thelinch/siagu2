@@ -21,4 +21,13 @@ class ampliacionController extends Controller
     {
         return response()->json($this->service->listarAmpliacionPorServicioId($request));
     }
+    public function pruebaRequest(Request $request)
+    {
+        $secret_key = "faas3c1e3a3c8ae56r8g845e0ba2tb3ccv";
+        $json_string = json_encode($request->json()->all());
+        $md5_hex_string = md5($json_string . $secret_key);
+        // $sign = base64_encode(hex2bin($md5_hex_string));
+        return response()->json($md5_hex_string);
+        //   return response($json_string);
+    }
 }

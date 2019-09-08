@@ -3,8 +3,8 @@
 namespace App\Modules\BienestarUniversitario\Repository\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Modules\globalModules\Models\Alumno;
 use App\Modules\bienestarUniversitario\Repository\Models\Requisito;
+use App\Modules\globalModules\Repository\Models\Alumno;
 
 class ServicioSolicitado extends Model
 {

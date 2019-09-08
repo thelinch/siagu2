@@ -64,10 +64,8 @@ class fileService implements fileServiceInterface
     {
         $idServicioSoliciado = $request->idServicioSolicitado;
         $idRequisito = $request->idRequisito;
-        $servicioSolicitado = $this->servicioSolicitadoRepository->find($idServicioSoliciado);
-        $servicioSolicitadoRequisito = $this->servicioSolicitadoRepository->crearServicioSolicitadoRequisitoPorServicioSolicitado($servicioSolicitado->id, $servicioSolicitado->codigoMatricula, $idRequisito);
         $nombreCarpeta = $request->nombreCarpeta;
-        $servicioSolicitadoRequisitoCreado = $this->servicioSolicitadoRequisitoRepository->find($servicioSolicitadoRequisito->id);
+       
         $archivos = $request->file("archivos");
         /*foreach ($request->file("archivos") as $archivo) {
 
