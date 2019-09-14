@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddServicioSolicitadoIdToServicioSolicitadoRequisitos extends Migration
+class AddObuServicioRequisitos extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class AddServicioSolicitadoIdToServicioSolicitadoRequisitos extends Migration
      */
     public function up()
     {
-        Schema::table('servicio_solicitado_requisitos', function (Blueprint $table) {
+        Schema::table('obuServicio_requisitos', function (Blueprint $table) {
             //
-            $table->integer('servicio_solicitado_id')->unsigned();
-            $table->foreign('servicio_solicitado_id')->references('id')->on('servicio_solicitados');
+            $table->integer('obuServicio_id')->unsigned();
+            $table->foreign('obuServicio_id')->references('id')->on('obuSolicitudes');
         });
     }
 

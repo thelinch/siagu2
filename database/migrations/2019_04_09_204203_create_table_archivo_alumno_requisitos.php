@@ -19,8 +19,8 @@ class CreateTableArchivoAlumnoRequisitos extends Migration
             $table->string('url');
             $table->string('extension', 8);
             $table->integer("estado")->default(1);
-            $table->integer('servicio_requisito_id')->unsigned();
-            $table->foreign('servicio_requisito_id')->references('id')->on('servicio_solicitado_requisitos');
+            $table->integer('obuServicio_requisito_id')->unsigned();
+            $table->foreign('obuServicio_requisito_id')->references('id')->on('obuServicio_requisitos');
             $table->nullableTimestamps();
         });
     }

@@ -13,7 +13,7 @@ class AddPriorizacionToServicioSolicitados extends Migration
      */
     public function up()
     {
-        Schema::table('servicio_solicitados', function (Blueprint $table) {
+        Schema::table('obuSolicitudes', function (Blueprint $table) {
             //
             $table->boolean("priorizacion")->default(0);
         });

@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTableServicioSolicitadosServicios extends Migration
+class CreateTableobuSolicitudServicios extends Migration
 {
     /**
      * Run the migrations.
@@ -12,10 +12,10 @@ class CreateTableServicioSolicitadosServicios extends Migration
      */
     public function up()
     {
-        Schema::create('solicitado_servicios', function (Blueprint $table) {
+        Schema::create('obuSolicitud_servicios', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('servicio_solicitado_id')->unsigned();
-            $table->foreign('servicio_solicitado_id')->references('id')->on('servicio_solicitados');
+            $table->integer('obuSolicitud_id')->unsigned();
+            $table->foreign('obuSolicitud_id')->references('id')->on('obuSolicitudes');
             $table->integer('servicio_id')->unsigned();
             $table->foreign('servicio_id')->references('id')->on('servicios');
             $table->integer("estado")->default(1);

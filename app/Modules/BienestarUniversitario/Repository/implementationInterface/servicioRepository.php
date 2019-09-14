@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Modules\BienestarUniversitario\Repository\implementationInterface;
 
 use App\Modules\BienestarUniversitario\Repository\interfaces\ServicioRepositoryInterface;
@@ -46,7 +47,7 @@ class servicioRepository implements ServicioRepositoryInterface
                 "nombre" => $modelObjeto["nombre"],
                 "icono" => $modelObjeto["icono"] != null ? $modelObjeto["icono"] : "fa-eye-slash",
                 "codigoMatricula" => $modelObjeto["matricula"]["nombre"],
-                "divisio_personas" => $modelObjeto["divisio_personas"]
+                "divisio_personas" => $modelObjeto["divisio_personas"] == null ? false : true
             ]
         );
         $this->cicloAcademicoModel->create([

@@ -12,14 +12,14 @@ class CreateTableServicioSolicitadoRequisitos extends Migration
      */
     public function up()
     {
-        Schema::create('servicio_solicitado_requisitos', function (Blueprint $table) {
+        Schema::create('obuServicio_requisitos', function (Blueprint $table) {
             $table->increments('id');
-       
+
             $table->integer("requisito_id")->unsigned();
             $table->foreign('requisito_id')->references('id')->on('requisitos')->onDelete('cascade');
             $table->string("codigoMatricula", 44);
             $table->dateTime("fechaRegistro")->nullable();
-           
+
             $table->integer("estado")->default(1);
             $table->nullableTimestamps();
         });
