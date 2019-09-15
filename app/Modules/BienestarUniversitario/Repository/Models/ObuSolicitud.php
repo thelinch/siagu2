@@ -6,10 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 use App\Modules\bienestarUniversitario\Repository\Models\Requisito;
 use App\Modules\globalModules\Repository\Models\Alumno;
 
-class ServicioSolicitado extends Model
+class ObuSolicitud extends Model
 {
     //
-    protected $table = "servicio_solicitados";
+    protected $table = "obusolicitudes";
     protected $fillable = ["alumno_id", "estado_servicio_id", "fechaRegistro", "codigoMatricula", "priorizacion"];
     protected $date = [
         "fechaRegistro"
@@ -24,7 +24,7 @@ class ServicioSolicitado extends Model
     }
     public function servicios()
     {
-        return $this->belongsToMany(Servicio::class, "solicitado_servicios", "servicio_solicitado_id", "servicio_id")->withPivot("estado")->wherePivot("estado", "=", 1);
+        return $this->belongsToMany(Servicio::class, "obusolicitud_servicios", "obuSolicitud_id", "servicio_id")->withPivot("estado")->wherePivot("estado", "=", 1);
     }
     public function alumno()
     {
@@ -40,6 +40,6 @@ class ServicioSolicitado extends Model
     }
     public function requisitos()
     {
-        return $this->belongsToMany(Requisito::class, "servicio_solicitado_requisitos", "servicio_solicitado_id", "requisito_id");
+        return $this->belongsToMany(Requisito::class, "obuservicio_requisitos", "obuServicio_id", "requisito_id");
     }
 }

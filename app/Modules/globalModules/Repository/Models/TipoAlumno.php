@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class TipoAlumno extends Model
 {
-    protected $table = "tipo_alumnos";
+    protected $table = "tipos_alumnos";
     protected $fillable = ['nombre', "estado"];
     public function alumnos()
     {

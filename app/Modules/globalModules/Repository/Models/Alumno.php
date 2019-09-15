@@ -2,8 +2,8 @@
 
 namespace App\Modules\globalModules\Repository\Models;
 
+use App\Modules\BienestarUniversitario\Repository\Models\ObuSolicitud;
 use Illuminate\Database\Eloquent\Model;
-use App\Modules\BienestarUniversitario\Repository\Models\ServicioSolicitado;
 
 
 class Alumno extends Model
@@ -17,7 +17,7 @@ class Alumno extends Model
     protected $fillable = ['codigo', "correo_institucional", "escuela_profesional_id", "tipo_alumno_id", "grado_alumno"];
     public function serviciosSolicitados()
     {
-        return $this->hasMany(ServicioSolicitado::class);
+        return $this->hasMany(ObuSolicitud::class);
     }
     public function escuelaProfesional()
     {

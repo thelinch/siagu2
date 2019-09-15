@@ -1,17 +1,18 @@
 <?php
+
 namespace App\Modules\BienestarUniversitario\Repository\implementationInterface;
 
 use Illuminate\Http\Request;
-use App\Modules\BienestarUniversitario\Repository\Models\ServicioSolicitado;
 use App\Modules\BienestarUniversitario\Repository\interfaces\servicioSolicitadoRepositoryInterface;
+use App\Modules\BienestarUniversitario\Repository\Models\ObuSolicitud;
 use Carbon\Carbon;
 
 class servicioSolicitadoRepository implements servicioSolicitadoRepositoryInterface
 {
     private $model;
-    public function __construct(ServicioSolicitado $servicioSolicitado)
+    public function __construct(ObuSolicitud $obuSolicitud)
     {
-        $this->model = $servicioSolicitado;
+        $this->model = $obuSolicitud;
     }
     public function all()
     { }
@@ -30,7 +31,7 @@ class servicioSolicitadoRepository implements servicioSolicitadoRepositoryInterf
     {
 
         return $this->model->where("codigoMatricula", "=", $semestreActual)
-            ->with(["alumno.escuelaProfesional", "alumno.persona", "alumno.tipoAlumno", "servicios", "estadoServicio"])->get();
+            ->with(["servicios", "estadoServicio"])->get();
     }
     public function registroServicioSolicitadoPorAlumno(Request $request, string $codigoMatricula)
     {
