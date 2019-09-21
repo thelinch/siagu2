@@ -24,7 +24,7 @@ class ObuSolicitud extends Model
     }
     public function servicios()
     {
-        return $this->belongsToMany(Servicio::class, "obusolicitud_servicios", "obuSolicitud_id", "servicio_id")->withPivot("estado")->wherePivot("estado", "=", 1);
+        return $this->belongsToMany(Servicio::class, "obusolicitud_servicios", "obu_solicitud_id", "servicio_id")->withPivot("estado")->wherePivot("estado", "=", 1);
     }
     public function alumno()
     {
@@ -32,14 +32,14 @@ class ObuSolicitud extends Model
     }
     public function serviciSolicitadoRequisitos()
     {
-        return $this->hasMany(ServicioSolicitadoRequisito::class);
+        return $this->hasMany(ObuServicioRequisito::class);
     }
     public function servicioSolicitadoRequisitos()
     {
-        return $this->hasMany(ServicioSolicitadoRequisito::class);
+        return $this->hasMany(ObuServicioRequisito::class);
     }
     public function requisitos()
     {
-        return $this->belongsToMany(Requisito::class, "obuservicio_requisitos", "obuServicio_id", "requisito_id");
+        return $this->belongsToMany(Requisito::class, "obuservicio_requisitos", "obu_solicitud_id", "requisito_id");
     }
 }

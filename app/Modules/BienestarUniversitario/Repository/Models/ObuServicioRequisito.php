@@ -9,7 +9,7 @@ class ObuServicioRequisito extends Model
 {
     //
     protected $table = "obuservicio_requisitos";
-    protected $fillable = ["codigoMatricula", "fechaRegistro", "requisito_id"];
+    protected $fillable = ["codigoMatricula", "obu_solicitud_id", "fechaRegistro", "requisito_id"];
     protected $dates = [
         "fechaRegistro"
     ];

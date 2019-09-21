@@ -8,6 +8,8 @@ class ArchivoAlumnoRequisito extends Model
 {
     //
     protected $table = "archivo_alumno_requisitos";
+    protected $fillable = ["nombreOriginal", "nombreSistema", "url", "extension", "estado", "obuServicio_requisito_id"];
+
 
     public function alumnoRequisito()
     {

@@ -15,8 +15,8 @@ class AddObuServicioRequisitos extends Migration
     {
         Schema::table('obuServicio_requisitos', function (Blueprint $table) {
             //
-            $table->integer('obuServicio_id')->unsigned();
-            $table->foreign('obuServicio_id')->references('id')->on('obuSolicitudes');
+            $table->integer('obu_solicitud_id')->unsigned();
+            $table->foreign('obu_solicitud_id')->references('id')->on('obuSolicitudes');
         });
     }
 

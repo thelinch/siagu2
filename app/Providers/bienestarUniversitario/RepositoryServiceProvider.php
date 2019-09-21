@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Providers\bienestarUniversitario;
 
 use Illuminate\Support\ServiceProvider;
@@ -21,6 +22,9 @@ use App\Modules\BienestarUniversitario\Repository\interfaces\servicioSolicitadoR
 use App\Modules\BienestarUniversitario\Repository\interfaces\ampliacionRepositoryInterface;
 use App\Modules\BienestarUniversitario\Repository\interfaces\requisitoArchivoRepositoryInterface;
 use App\Modules\BienestarUniversitario\Repository\interfaces\servicioSolicitadoRequisitoInterface;
+use App\Modules\BienestarUniversitario\Repository\interfaces\obuSolicitudRequisitoArchivoRepositoryInterface;
+
+use App\Modules\BienestarUniversitario\Repository\implementationInterface\obuSolicitudRequisitoArchivoRepository;
 
 class RepositoryServiceProvider extends ServiceProvider
 {
@@ -62,6 +66,10 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(
             servicioSolicitadoRequisitoInterface::class,
             servicioSolicitadoRequisitoRepository::class
+        );
+        $this->app->bind(
+            obuSolicitudRequisitoArchivoRepositoryInterface::class,
+            obuSolicitudRequisitoArchivoRepository::class
         );
         /**/
         /*$this->app->bind(

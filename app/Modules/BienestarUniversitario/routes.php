@@ -61,5 +61,6 @@ Route::group(['prefix' => 'bienestar', 'namespace' => 'App\Modules\BienestarUniv
     Route::post("/ampliacion/pruebaRequest", ["as" => "bienestar.ampliacion.pruebaRequest", "uses" => "ampliacionController@pruebaRequest"]);
 
     //servicioSolicitadoRequisito
-    Route::post("/servicioSolicitadoRequisito/create", ["as" => "bienestar.servicioSolicitadoRequisito.create", "uses" => "servicioSolicitadoController@create"]);
+    Route::post("/servicioSolicitadoRequisito/create", ["as" => "bienestar.servicioSolicitadoRequisito.create", "uses" => "servicioSolicitadoRequisitoController@create"]);
+    Route::post("/obuSolicitudRequisitoArchivo/create", ["as" => "bienestar.obuSolicitudRequisitoArchivosController.create", "uses" => "obuSolicitudRequisitoArchivosController@create"]);
 });

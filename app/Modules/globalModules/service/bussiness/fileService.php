@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Modules\globalModules\service\bussiness;
 
 use App\Modules\globalModules\service\interfaces\fileServiceInterface;
@@ -33,10 +34,10 @@ class fileService implements fileServiceInterface
         if (!\Storage::disk("public")->has($nombreCarpeta)) {
             \Storage::makeDirectory($nombreCarpeta, 0775, true);
         }
-        $nombreSistema = $request->id;
+        $nombreSistema = $nombre . round(microtime(true) * 1000);
         $extension = $file->extension();
         \Storage::disk('public')->put($nombreCarpeta . "/" . $nombreSistema . "." . $extension, \File::get($file));
-        $url = \Storage::url($nombreCarpeta . "/" . $nombreSistema . "." . $extension);
+        $url = \Storage::url($nombreCarpeta . $nombreSistema . "." . $extension);
         return $url;
     }
     public  function fileUploadRequisito(Request $request)
@@ -65,7 +66,7 @@ class fileService implements fileServiceInterface
         $idServicioSoliciado = $request->idServicioSolicitado;
         $idRequisito = $request->idRequisito;
         $nombreCarpeta = $request->nombreCarpeta;
-       
+
         $archivos = $request->file("archivos");
         /*foreach ($request->file("archivos") as $archivo) {
 

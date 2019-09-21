@@ -17,6 +17,8 @@ use App\Modules\BienestarUniversitario\service\bussiness\ampliacionService;
 use App\Modules\BienestarUniversitario\service\interfaces\ampliacionServiceInterface;
 use App\Modules\globalModules\Repository\implementationInterface\cicloAcademicoRepository;
 use App\Modules\BienestarUniversitario\Repository\implementationInterface\servicioSolicitadoRepository;
+use App\Modules\BienestarUniversitario\service\bussiness\obuSolicitudRequisitoArchivosService;
+use App\Modules\BienestarUniversitario\service\interfaces\obuSolicitudRequisitoArchivosServiceInterface;
 use App\Modules\globalModules\Repository\implementationInterface\alumnoRepository;
 
 class serviceRegisterProvider extends ServiceProvider
@@ -74,6 +76,11 @@ class serviceRegisterProvider extends ServiceProvider
             return new ampliacionService(
                 $app->make(ampliacionServiceInterface::class),
                 $app->make(servicioRepository::class)
+            );
+        });
+        $this->app->bind("obuSolicitudRequisitoArchivosService", function ($app) {
+            return new obuSolicitudRequisitoArchivosService(
+                $app->make(obuSolicitudRequisitoArchivosServiceInterface::class)
             );
         });
     }

@@ -1,17 +1,18 @@
 <?php
+
 namespace App\Modules\BienestarUniversitario\Repository\implementationInterface;
 
 use App\Modules\BienestarUniversitario\Repository\interfaces\servicioSolicitadoRequisitoInterface;
+use App\Modules\BienestarUniversitario\Repository\Models\ObuServicioRequisito;
 use Illuminate\Http\Request;
-use App\Modules\BienestarUniversitario\Repository\Models\ServicioSolicitadoRequisito;
 use Illuminate\Support\Carbon;
 
 class servicioSolicitadoRequisitoRepository implements servicioSolicitadoRequisitoInterface
 {
     private $model;
-    public function __construct(ServicioSolicitadoRequisito $servicioSolicitadoRequisito)
+    public function __construct(ObuServicioRequisito $obuServicioRequisito)
     {
-        $this->model = $servicioSolicitadoRequisito;
+        $this->model = $obuServicioRequisito;
     }
 
     public function all()
@@ -27,7 +28,7 @@ class servicioSolicitadoRequisitoRepository implements servicioSolicitadoRequisi
         $cuerpoPeticion = $data->json()->all();
         $servicioSolicitadoRequisitoCreado = $this->model->create([
             "codigoMatricula" => $cuerpoPeticion["codigoMatricula"],
-            "servicio_solicitado_id" => $cuerpoPeticion["idServicioSolicitado"],
+            "obu_solicitud_id" => $cuerpoPeticion["idServicioSolicitado"],
             "fechaRegistro" => Carbon::now(),
             "requisito_id" => $cuerpoPeticion["idRequisito"]
         ]);

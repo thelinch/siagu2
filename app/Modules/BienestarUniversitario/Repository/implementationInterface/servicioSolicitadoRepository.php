@@ -42,7 +42,7 @@ class servicioSolicitadoRepository implements servicioSolicitadoRepositoryInterf
             "fechaRegistro" => Carbon::now(),
             "codigoMatricula" => $codigoMatricula,
         ]);
-        foreach ($cuerpoPeticion["listaDeServicioSolicitados"] as $servicio) {
+        foreach ($cuerpoPeticion["listaServiciosSolicitados"] as $servicio) {
             $servicioSolicitado->servicios()->attach($servicio);
         }
         return $this->find($servicioSolicitado->id)->with(["servicios", "estadoServicio"])->first();
