@@ -71,7 +71,6 @@ class servicioService implements servicioServiceInterface
         $listaRequisitosPorListaServicios = $this->repositoy->listarRequisitosPorListaDeServicio($cuerpoPeticio["listaServiciosSolicitados"]);
         $listaRequisitoPorTipoAlumno = $this->filtradoRequisitoPorElTipoAlumno($tipoAlumno->nombre, $listaRequisitosPorListaServicios);
         $requisitos = collect();
-        $entro = "ddw";
         $cicloAcademicoActual = $this->cicloAcademicoRepository->cicloAcademicoActual();
         $requisitosRegistradosPorCicloActual = $this->servicioSolicitadoRepository->listarRequisitosRegistradosComedorYInternadoPorAlumnoYSemestreActual($cuerpoPeticio["idAlumno"], $cicloAcademicoActual->nombre);
         if ($tipoAlumno->nombre == "ANTIGUO") {

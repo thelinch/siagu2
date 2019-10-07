@@ -1,8 +1,10 @@
 <?php
+
 namespace App\Modules\BienestarUniversitario\Repository\implementationInterface;
 
 use App\Modules\BienestarUniversitario\Repository\interfaces\requisitoArchivoRepositoryInterface;
 use App\Modules\BienestarUniversitario\Repository\Models\RequisitoArchivos;
+use Illuminate\Http\Request;
 
 class requisitoArchivoRepository implements requisitoArchivoRepositoryInterface
 {
@@ -12,15 +14,10 @@ class requisitoArchivoRepository implements requisitoArchivoRepositoryInterface
         $this->model = $model;
     }
 
-    public function create(String $nombreOriginalArchivo, String $nombreSistemaArchivo, int $requisito_id, String $url, String $extension)
+    public function create(Request $request)
     {
-        $modelCreate = $this->model->create([
-            "nombreOriginalArchivo" => $nombreOriginalArchivo,
-            "nombreSistemaArchivo" => $nombreSistemaArchivo,
-            "requisito_id" => $requisito_id,
-            "url" => $url,
-            "extension" => $extension
-        ]);
+        $modelCreate = $this->model->create($request->json()->all());
+        return $modelCreate;
     }
     public function eliminar(int $id)
     {

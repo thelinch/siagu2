@@ -29,16 +29,21 @@ class fileService implements fileServiceInterface
     public function fileUpload(Request $request)
     {
         $file = $request->file("archivo");
-        $nombre = $file->getClientOriginalName();
+        $nombreOriginalArchivo = $file->getClientOriginalName();
         $nombreCarpeta = $request->nombreCarpeta;
         if (!\Storage::disk("public")->has($nombreCarpeta)) {
             \Storage::makeDirectory($nombreCarpeta, 0775, true);
         }
-        $nombreSistema = $nombre . round(microtime(true) * 1000);
+        $nombreSistema = $nombreOriginalArchivo . round(microtime(true) * 1000);
         $extension = $file->extension();
         \Storage::disk('public')->put($nombreCarpeta . "/" . $nombreSistema . "." . $extension, \File::get($file));
         $url = \Storage::url($nombreCarpeta . $nombreSistema . "." . $extension);
-        return $url;
+        return json_encode(array(
+            "url" => $url,
+            "extension" => $extension,
+            "nombreSistemaArchivo" => $nombreSistema,
+            "nombreOriginalArchivo" => $nombreOriginalArchivo
+        ));
     }
     public  function fileUploadRequisito(Request $request)
     {
@@ -54,7 +59,7 @@ class fileService implements fileServiceInterface
         \Storage::disk("public")->put($nombreCarpeta . '/' . $sistemaNombre, \File::get($file));
         $url = \Storage::url($nombreCarpeta . $sistemaNombre);
         $extension = $file->getClientOriginalExtension();
-        $this->archivoRequisitoRepository->create($originalNombre, $sistemaNombre, $idRequisito, $url, $extension);
+        // $this->archivoRequisitoRepository->create($originalNombre, $sistemaNombre, $idRequisito, $url, $extension);
     }
     public function elimnarArchivoRequisito(Request $request)
     {
