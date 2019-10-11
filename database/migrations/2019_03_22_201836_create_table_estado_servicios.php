@@ -14,7 +14,7 @@ class CreateTableEstadoServicios extends Migration
     {
         Schema::create('estado_servicios', function (Blueprint $table) {
             $table->increments('id');
-            $table->string("nombre");
+            $table->enum("nombre", array("Registrado", "Enviado", "Aceptado", "Observado"));
             $table->integer("estado")->default(1);
             $table->nullableTimestamps();
         });

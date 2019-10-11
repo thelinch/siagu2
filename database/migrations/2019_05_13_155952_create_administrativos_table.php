@@ -16,7 +16,7 @@ class CreateAdministrativosTable extends Migration
             $table->increments('id');
             $table->string('codigo', 30);
             $table->string('correo_institucional', 50);
-            $table->string("numero_colegiatura",20);
+            $table->string("numero_colegiatura", 20);
             $table->string('url_cv', 255);
             $table->string("codigo_essalud", 20);
             $table->integer("estado")->default(1);
